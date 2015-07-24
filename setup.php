@@ -56,7 +56,7 @@ function plugin_version_environment() {
       'version' => '1.8.0',
       'license' => 'GPLv2+',
       'author'  => "<a href='http://infotel.com/services/expertise-technique/glpi/'>Infotel</a>",
-      'homepage'=>'https://forge.indepnet.net/projects/environment',
+      'homepage'=>'https://github.com/InfotelGLPI/environment',
       'minGlpiVersion' => '0.90',
    );
 
