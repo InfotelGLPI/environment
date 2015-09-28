@@ -3,7 +3,7 @@
    <name>Meta-Plugin Environment</name>
    <key>environment</key>
    <state>stable</state>
-   <logo></logo>
+   <logo>https://raw.githubusercontent.com/InfotelGLPI/environment/master/environment.png</logo>
    <description>
       <short>
          <fr><![CDATA[Meta-plugin environment. Ce plugin vous permet de regrouper dix plugins dans un seul pour une meilleure visibilité du menu des plugins.<br />Peut contenir : <br />- Plugin appliances<br />- Plugin webapplications<br />- Plugin certificates<br />- Plugin accounts<br />- Plugin connections<br />- Plugin domains<br />- Plugin databases<br />- Plugin backups<br />- Plugin badges<br />- Plugin rights]]></fr>
