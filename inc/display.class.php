@@ -46,7 +46,7 @@ class PluginEnvironmentDisplay extends CommonGLPI {
 
       $menu                                           = array();
       $menu['title']                                  = self::getMenuName();
-      $menu['page']                                   = "/plugins/environment/front/environment.php";
+      $menu['page']                                   = "/plugins/environment/front/display.php";
       
       $plugs = self::$plugins;
       foreach ($plugs as $plug) {
@@ -63,11 +63,28 @@ class PluginEnvironmentDisplay extends CommonGLPI {
                $item     = new $itemtype();
                
                $menu['options'][$plug]['title']            = $item::getTypeName();
-               $menu['options'][$plug]['page']             = "/plugins/$plug/front/webapplication.php";
+               $menu['options'][$plug]['page']             = $item::getSearchURL(false);
                $menu['options'][$plug]['links']['search']  = $item::getSearchURL(false);
                if (Session::haveRight("plugin_".$plug, CREATE)) {
                   $menu['options'][$plug]['links']['add']   = $item::getFormURL(false);
                }
+            }
+            
+            if ($plug == "accounts") {
+               $image = "<img src='".$CFG_GLPI["root_doc"]."/plugins/accounts/pics/cadenas.png' title='".
+               _n('Encryption key', 'Encryption keys', 2, 'accounts')."' alt='".
+               _n('Encryption key', 'Encryption keys', 2, 'accounts')."'>";
+               $menu['options'][$plug]['links'][$image] = PluginAccountsHash::getSearchURL(false);
+               
+               $menu['options']['hash']['title']               = PluginAccountsHash::getTypeName(2);
+               $menu['options']['hash']['page']                = PluginAccountsHash::getSearchURL(false);
+               $menu['options']['hash']['links']['search']     = PluginAccountsHash::getSearchURL(false);
+               $menu['options']['hash']['links'][$image]       = PluginAccountsHash::getSearchURL(false);;
+
+               if (PluginAccountsHash::canCreate()) {
+                  $menu['options']['hash']['links']['add']     = PluginAccountsHash::getFormURL(false);
+               }
+      
             }
          }
       }
