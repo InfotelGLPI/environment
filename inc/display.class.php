@@ -188,7 +188,7 @@ class PluginEnvironmentDisplay extends CommonGLPI {
                if (Session::isMultiEntitiesMode()) {
                   echo "<td class='left top'>".Dropdown::getDropdownName("glpi_entities",$data["entities_id"])."</td>";
                   if($data["entities_id"]==0) {
-                     $link="&criteria[1][link]=AND&criteria[1][searchtype]=contains&criteria[1][value]=NULL&criteria[1][field]=80";
+                     $link="&criteria[1][link]=AND&criteria[1][searchtype]=contains&criteria[1][value]=-1&criteria[1][field]=81";
                   } else {
                      $link="&criteria[1][link]=AND&criteria[1][searchtype]=equals&criteria[1][value]=".$data["entities_id"]."&criteria[1][field]=80";
                   }
@@ -236,7 +236,7 @@ class PluginEnvironmentDisplay extends CommonGLPI {
                if (Session::isMultiEntitiesMode()) {
                   echo "<td class='left top'>".Dropdown::getDropdownName("glpi_entities",$data["entities_id"])."</td>";
                   if($data["entities_id"]==0) {
-                     $link="&criteria[1][link]=AND&criteria[1][searchtype]=contains&criteria[1][value]=NULL&criteria[1][field]=80";
+                     $link="&criteria[1][link]=AND&criteria[1][searchtype]=contains&criteria[1][value]=-1&criteria[1][field]=81";
                   } else {
                      $link="&criteria[1][link]=AND&criteria[1][searchtype]=equals&criteria[1][value]=".$data["entities_id"]."&criteria[1][field]=80";
                   }
@@ -285,7 +285,7 @@ class PluginEnvironmentDisplay extends CommonGLPI {
                if (Session::isMultiEntitiesMode()) {
                   echo "<td class='left top'>".Dropdown::getDropdownName("glpi_entities",$data["entities_id"])."</td>";
                   if($data["entities_id"]==0) {
-                     $link="&criteria[1][link]=AND&criteria[1][searchtype]=contains&criteria[1][value]=NULL&criteria[1][field]=80";
+                     $link="&criteria[1][link]=AND&criteria[1][searchtype]=contains&criteria[1][value]=-1&criteria[1][field]=81";
                   } else {
                      $link="&criteria[1][link]=AND&criteria[1][searchtype]=equals&criteria[1][value]=".$data["entities_id"]."&criteria[1][field]=80";
                   }
@@ -360,7 +360,7 @@ class PluginEnvironmentDisplay extends CommonGLPI {
                if (Session::isMultiEntitiesMode()) {
                   echo "<td class='left top'>".Dropdown::getDropdownName("glpi_entities",$data["entities_id"])."</td>";
                   if($data["entities_id"]==0) {
-                     $link="&criteria[1][link]=AND&criteria[1][searchtype]=contains&criteria[1][value]=NULL&criteria[1][field]=80";
+                     $link="&criteria[1][link]=AND&criteria[1][searchtype]=contains&criteria[1][value]=-1&criteria[1][field]=81";
                   } else {
                      $link="&criteria[1][link]=AND&criteria[1][searchtype]=equals&criteria[1][value]=".$data["entities_id"]."&criteria[1][field]=80";
                   }
@@ -370,7 +370,7 @@ class PluginEnvironmentDisplay extends CommonGLPI {
                   if (!Session::haveRight("plugin_accounts_see_all_users", 1)) {
                      if (Session::haveRight("plugin_accounts_my_groups", 1)){
                         if($data["entities_id"]==0) {
-                           $linkgroup="&criteria[1][link]=AND&criteria[1][field]=80&criteria[1][searchtype]=equals&criteria[1][value]=NULL";
+                           $linkgroup="&criteria[1][link]=AND&criteria[1][field]=81&criteria[1][searchtype]=equals&criteria[1][value]=-1";
                         } else {
                            $linkgroup="&criteria[1][link]=AND&criteria[1][field]=80&criteria[1][searchtype]=equals&criteria[1][value]=".$data["entities_id"];
                         }
@@ -386,7 +386,7 @@ class PluginEnvironmentDisplay extends CommonGLPI {
                   if (!Session::haveRight("plugin_accounts_see_all_users", 1)) {
                      if (Session::haveRight("plugin_accounts_my_groups", 1)){
                         if($data["entities_id"]==0) {
-                           $linkgroup="&criteria[1][link]=AND&criteria[1][field]=80&criteria[1][searchtype]=equals&criteria[1][value]=NULL";//"mygroups
+                           $linkgroup="&criteria[1][link]=AND&criteria[1][field]=81&criteria[1][searchtype]=equals&criteria[1][value]=-1";//"mygroups
                         } else {
                            $linkgroup="&criteria[1][link]=AND&criteria[1][field]=80&criteria[1][searchtype]=equals&criteria[1][value]=".$data["entities_id"];
                         }
@@ -437,7 +437,7 @@ class PluginEnvironmentDisplay extends CommonGLPI {
                if (Session::isMultiEntitiesMode()) {
                   echo "<td class='left top'>".Dropdown::getDropdownName("glpi_entities",$data["entities_id"])."</td>";
                   if($data["entities_id"]==0) {
-                     $link="&criteria[1][link]=AND&criteria[1][searchtype]=contains&criteria[1][value]=NULL&criteria[1][field]=80";
+                     $link="&criteria[1][link]=AND&criteria[1][searchtype]=contains&criteria[1][value]=-1&criteria[1][field]=81";
                   } else {
                      $link="&criteria[1][link]=AND&criteria[1][searchtype]=equals&criteria[1][value]=".$data["entities_id"]."&criteria[1][field]=80";
                   }
@@ -486,7 +486,7 @@ class PluginEnvironmentDisplay extends CommonGLPI {
                if (Session::isMultiEntitiesMode()) {
                   echo "<td class='left top'>".Dropdown::getDropdownName("glpi_entities",$data["entities_id"])."</td>";
                   if($data["entities_id"]==0) {
-                     $link="&criteria[1][link]=AND&criteria[1][searchtype]=contains&criteria[1][value]=NULL&criteria[1][field]=80";
+                     $link="&criteria[1][link]=AND&criteria[1][searchtype]=contains&criteria[1][value]=-1&criteria[1][field]=81";
                   } else {
                      $link="&criteria[1][link]=AND&criteria[1][searchtype]=equals&criteria[1][value]=".$data["entities_id"]."&criteria[1][field]=80";
                   }
@@ -535,7 +535,7 @@ class PluginEnvironmentDisplay extends CommonGLPI {
                if (Session::isMultiEntitiesMode()) {
                   echo "<td class='left top'>".Dropdown::getDropdownName("glpi_entities",$data["entities_id"])."</td>";
                   if($data["entities_id"]==0) {
-                     $link="&criteria[1][link]=AND&criteria[1][searchtype]=contains&criteria[1][value]=NULL&criteria[1][field]=80";
+                     $link="&criteria[1][link]=AND&criteria[1][searchtype]=contains&criteria[1][value]=-1&criteria[1][field]=81";
                   } else {
                      $link="&criteria[1][link]=AND&criteria[1][searchtype]=equals&criteria[1][value]=".$data["entities_id"]."&criteria[1][field]=80";
                   }
