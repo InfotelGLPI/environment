@@ -16,6 +16,8 @@
    </description>
    <homepage>https://github.com/InfotelGLPI/environment</homepage>
    <download>https://github.com/InfotelGLPI/environment/releases</download>
+   <issues>https://github.com/InfotelGLPI/environment/issues</issues>
+   <readme>https://raw.githubusercontent.com/InfotelGLPI/environment/master/README.md</readme>
    <authors>
       <author>Xavier Caillaud</author>
       <author>Infotel</author>
