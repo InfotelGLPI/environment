@@ -1,5 +1,5 @@
 # environment
-Plugin environment for GLPI 0.90
+Plugin environment for GLPI
 
 Ce plugin est sur Transifex - Aidez-nous à le traduire :
 https://www.transifex.com/tsmr/GLPI_environment/
