@@ -1,1 +1,7 @@
-ALTER TABLE `glpi_plugin_environment_profiles` ADD `backups` char(1) default NULL , ADD `parametre` char(1) default NULL , ADD `badges` char(1) default NULL , ADD `droits` char(1) default NULL , DROP COLUMN `interface` , DROP COLUMN `is_default`;
+ALTER TABLE `glpi_plugin_environment_profiles`
+  ADD `backups` CHAR(1) DEFAULT NULL,
+  ADD `parametre` CHAR(1) DEFAULT NULL,
+  ADD `badges` CHAR(1) DEFAULT NULL,
+  ADD `droits` CHAR(1) DEFAULT NULL,
+  DROP COLUMN `interface`,
+  DROP COLUMN `is_default`;

@@ -1,17 +1,18 @@
 DROP TABLE IF EXISTS `glpi_plugin_environment_profiles`;
 CREATE TABLE `glpi_plugin_environment_profiles` (
-  `ID` int(11) NOT NULL auto_increment,
-  `name` varchar(255) default NULL,
-  `interface` varchar(50) NOT NULL default 'environment',
-  `is_default` smallint(6) NOT NULL default '0',
-  `environment` char(1) default NULL,
-  `applicatifs` char(1) default NULL,
-  `appweb` char(1) default NULL,
-  `certificates` char(1) default NULL,
-  `compte` char(1) default NULL,
-  `connections` char(1) default NULL,
-  `domain` char(1) default NULL,
-  `sgbd` char(1) default NULL,
-  PRIMARY KEY  (`ID`),
+  `ID`           INT(11)     NOT NULL AUTO_INCREMENT,
+  `name`         VARCHAR(255)         DEFAULT NULL,
+  `interface`    VARCHAR(50) NOT NULL DEFAULT 'environment',
+  `is_default`   SMALLINT(6) NOT NULL DEFAULT '0',
+  `environment`  CHAR(1)              DEFAULT NULL,
+  `applicatifs`  CHAR(1)              DEFAULT NULL,
+  `appweb`       CHAR(1)              DEFAULT NULL,
+  `certificates` CHAR(1)              DEFAULT NULL,
+  `compte`       CHAR(1)              DEFAULT NULL,
+  `connections`  CHAR(1)              DEFAULT NULL,
+  `domain`       CHAR(1)              DEFAULT NULL,
+  `sgbd`         CHAR(1)              DEFAULT NULL,
+  PRIMARY KEY (`ID`),
   KEY `interface` (`interface`)
-) ENGINE=MyISAM;
+)
+  ENGINE = MyISAM;

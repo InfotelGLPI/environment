@@ -31,72 +31,96 @@ if (!defined('GLPI_ROOT')) {
    die("Sorry. You can't access directly to this file");
 }
 
-class PluginEnvironmentProfile extends CommonDBTM {
-   
-   static $rightname = "profile";
-   
-   function getTabNameForItem(CommonGLPI $item, $withtemplate=0) {
+/**
+ * Class PluginEnvironmentProfile
+ */
+class PluginEnvironmentProfile extends CommonDBTM
+{
 
-      if ($item->getType()=='Profile' 
-            && $item->getField('interface')!='helpdesk') {
-            return PluginEnvironmentDisplay::getTypeName(1);
+   static $rightname = "profile";
+
+   /**
+    * @param CommonGLPI $item
+    * @param int $withtemplate
+    * @return string|translated
+    */
+   function getTabNameForItem(CommonGLPI $item, $withtemplate = 0)
+   {
+
+      if ($item->getType() == 'Profile'
+         && $item->getField('interface') != 'helpdesk'
+      ) {
+         return PluginEnvironmentDisplay::getTypeName(1);
       }
       return '';
    }
 
 
-   static function displayTabContentForItem(CommonGLPI $item, $tabnum=1, $withtemplate=0) {
-      global $CFG_GLPI;
+   /**
+    * @param CommonGLPI $item
+    * @param int $tabnum
+    * @param int $withtemplate
+    * @return bool
+    */
+   static function displayTabContentForItem(CommonGLPI $item, $tabnum = 1, $withtemplate = 0)
+   {
 
-
-      if ($item->getType()=='Profile') {
+      if ($item->getType() == 'Profile') {
          $ID = $item->getID();
          $prof = new self();
 
-         self::addDefaultProfileInfos($ID, 
-                                    array('plugin_environment'                   => 0,
-                                          'plugin_environment_appliances'        => 0,
-                                          'plugin_environment_webapplications'   => 0,
-                                          'plugin_environment_certificates'      => 0,
-                                          'plugin_environment_accounts'          => 0,
-                                          'plugin_environment_domains'           => 0,
-                                          'plugin_environment_databases'         => 0,
-                                          'plugin_environment_badges'           => 0));
+         self::addDefaultProfileInfos($ID,
+            array('plugin_environment' => 0,
+               'plugin_environment_appliances' => 0,
+               'plugin_environment_webapplications' => 0,
+               'plugin_environment_certificates' => 0,
+               'plugin_environment_accounts' => 0,
+               'plugin_environment_domains' => 0,
+               'plugin_environment_databases' => 0,
+               'plugin_environment_badges' => 0));
          $prof->showForm($ID);
       }
       return true;
    }
 
-   static function createFirstAccess($ID) {
+   /**
+    * @param $ID
+    */
+   static function createFirstAccess($ID)
+   {
       //85
       self::addDefaultProfileInfos($ID,
-                                    array('plugin_environment'                   => 1,
-                                          'plugin_environment_appliances'        => 1,
-                                          'plugin_environment_webapplications'   => 1,
-                                          'plugin_environment_certificates'      => 1,
-                                          'plugin_environment_accounts'          => 1,
-                                          'plugin_environment_domains'           => 1,
-                                          'plugin_environment_databases'         => 1,
-                                          'plugin_environment_badges'           => 1), true);
+         array('plugin_environment' => 1,
+            'plugin_environment_appliances' => 1,
+            'plugin_environment_webapplications' => 1,
+            'plugin_environment_certificates' => 1,
+            'plugin_environment_accounts' => 1,
+            'plugin_environment_domains' => 1,
+            'plugin_environment_databases' => 1,
+            'plugin_environment_badges' => 1), true);
    }
-   
-    /**
-    * @param $profile
-   **/
-   static function addDefaultProfileInfos($profiles_id, $rights, $drop_existing = false) {
-      global $DB;
-      
+
+   /**
+    * @param $profiles_id
+    * @param $rights
+    * @param bool $drop_existing
+    * @internal param $profile
+    */
+   static function addDefaultProfileInfos($profiles_id, $rights, $drop_existing = false)
+   {
       $profileRight = new ProfileRight();
       foreach ($rights as $right => $value) {
          if (countElementsInTable('glpi_profilerights',
-                                   "`profiles_id`='$profiles_id' AND `name`='$right'") && $drop_existing) {
+               "`profiles_id`='$profiles_id' AND `name`='$right'") && $drop_existing
+         ) {
             $profileRight->deleteByCriteria(array('profiles_id' => $profiles_id, 'name' => $right));
          }
          if (!countElementsInTable('glpi_profilerights',
-                                   "`profiles_id`='$profiles_id' AND `name`='$right'")) {
+            "`profiles_id`='$profiles_id' AND `name`='$right'")
+         ) {
             $myright['profiles_id'] = $profiles_id;
-            $myright['name']        = $right;
-            $myright['rights']      = $value;
+            $myright['name'] = $right;
+            $myright['rights'] = $value;
             $profileRight->add($myright);
 
             //Add right to the current session
@@ -108,31 +132,36 @@ class PluginEnvironmentProfile extends CommonDBTM {
    /**
     * Show profile form
     *
-    * @param $items_id integer id of the profile
-    * @param $target value url of target
-    *
+    * @param int $profiles_id
+    * @param bool $openform
+    * @param bool $closeform
     * @return nothing
-    **/
-   function showForm($profiles_id=0, $openform=TRUE, $closeform=TRUE) {
+    * @internal param int $items_id id of the profile
+    * @internal param value $target url of target
+    */
+   function showForm($profiles_id = 0, $openform = TRUE, $closeform = TRUE)
+   {
 
       echo "<div class='firstbloc'>";
       if (($canedit = Session::haveRightsOr(self::$rightname, array(CREATE, UPDATE, PURGE)))
-          && $openform) {
+         && $openform
+      ) {
          $profile = new Profile();
-         echo "<form method='post' action='".$profile->getFormURL()."'>";
+         echo "<form method='post' action='" . $profile->getFormURL() . "'>";
       }
 
       $profile = new Profile();
       $profile->getFromDB($profiles_id);
       if ($profile->getField('interface') == 'central') {
          $rights = $this->getAllRights();
-         $profile->displayRightsChoiceMatrix($rights, array('canedit'       => $canedit,
-                                                         'default_class' => 'tab_bg_2',
-                                                         'title'         => __('General')));
+         $profile->displayRightsChoiceMatrix($rights, array('canedit' => $canedit,
+            'default_class' => 'tab_bg_2',
+            'title' => __('General')));
       }
-      
+
       if ($canedit
-          && $closeform) {
+         && $closeform
+      ) {
          echo "<div class='center'>";
          echo Html::hidden('id', array('value' => $profiles_id));
          echo Html::submit(_sx('button', 'Save'), array('name' => 'update'));
@@ -142,41 +171,46 @@ class PluginEnvironmentProfile extends CommonDBTM {
       echo "</div>";
    }
 
-   static function getAllRights($all = false) {
-      
+   /**
+    * @param bool $all
+    * @return array
+    */
+   static function getAllRights($all = false)
+   {
+
       $rights = array(
-          array('rights'  => array(READ    => __('Read')),
-                'label'     => __('Environment', 'environment'),
-                'field'     => 'plugin_environment'
-          ),
-          array('rights'  => array(READ    => __('Read')),
-                'label'     => __('Appliances', 'environment'),
-                'field'     => 'plugin_environment_appliances'
-          ),
-          array('rights'  => array(READ    => __('Read')),
-                'label'     => __('Web applications', 'environment'),
-                'field'     => 'plugin_environment_webapplications'
-          ),
-          array('rights'  => array(READ    => __('Read')),
-                'label'     => __('Certificates', 'environment'),
-                'field'     => 'plugin_environment_certificates'
-          ),
-          array('rights'  => array(READ    => __('Read')),
-                'label'     => __('Accounts', 'environment'),
-                'field'     => 'plugin_environment_accounts'
-          ),
-          array('rights'  => array(READ    => __('Read')),
-                'label'     => __('Domains', 'environment'),
-                'field'     => 'plugin_environment_domains'
-          ),
-          array('rights'  => array(READ    => __('Read')),
-                'label'     => __('Databases', 'environment'),
-                'field'     => 'plugin_environment_databases'
-          ),
-          array('rights'  => array(READ    => __('Read')),
-                'label'     => __('Badges', 'environment'),
-                'field'     => 'plugin_environment_badges'
-          ),
+         array('rights' => array(READ => __('Read')),
+            'label' => __('Environment', 'environment'),
+            'field' => 'plugin_environment'
+         ),
+         array('rights' => array(READ => __('Read')),
+            'label' => __('Appliances', 'environment'),
+            'field' => 'plugin_environment_appliances'
+         ),
+         array('rights' => array(READ => __('Read')),
+            'label' => __('Web applications', 'environment'),
+            'field' => 'plugin_environment_webapplications'
+         ),
+         array('rights' => array(READ => __('Read')),
+            'label' => __('Certificates', 'environment'),
+            'field' => 'plugin_environment_certificates'
+         ),
+         array('rights' => array(READ => __('Read')),
+            'label' => __('Accounts', 'environment'),
+            'field' => 'plugin_environment_accounts'
+         ),
+         array('rights' => array(READ => __('Read')),
+            'label' => __('Domains', 'environment'),
+            'field' => 'plugin_environment_domains'
+         ),
+         array('rights' => array(READ => __('Read')),
+            'label' => __('Databases', 'environment'),
+            'field' => 'plugin_environment_databases'
+         ),
+         array('rights' => array(READ => __('Read')),
+            'label' => __('Badges', 'environment'),
+            'field' => 'plugin_environment_badges'
+         ),
       );
 
       return $rights;
@@ -185,11 +219,14 @@ class PluginEnvironmentProfile extends CommonDBTM {
    /**
     * Init profiles
     *
-    **/
-    
-   static function translateARight($old_right) {
+    * @param $old_right
+    * @return int
+    */
+
+   static function translateARight($old_right)
+   {
       switch ($old_right) {
-         case '': 
+         case '':
             return 0;
          case 'r' :
             return READ;
@@ -198,76 +235,81 @@ class PluginEnvironmentProfile extends CommonDBTM {
          case '0':
          case '1':
             return $old_right;
-            
+
          default :
             return 0;
       }
    }
-   
+
    /**
-   * @since 0.85
-   * Migration rights from old system to the new one for one profile
-   * @param $profiles_id the profile ID
-   */
-   static function migrateOneProfile($profiles_id) {
+    * @since 0.85
+    * Migration rights from old system to the new one for one profile
+    * @param $profiles_id the profile ID
+    * @return bool
+    */
+   static function migrateOneProfile($profiles_id)
+   {
       global $DB;
       //Cannot launch migration if there's nothing to migrate...
       if (!TableExists('glpi_plugin_environment_profiles')) {
-      return true;
+         return true;
       }
-      
-      foreach ($DB->request('glpi_plugin_environment_profiles', 
-                            "`profiles_id`='$profiles_id'") as $profile_data) {
 
-         $matching = array('environment'    => 'plugin_environment', 
-                           'appliances' => 'plugin_environment_appliances',
-                           'webapplications' => 'plugin_environment_webapplications',
-                           'certificates' => 'plugin_environment_certificates',
-                           'accounts' => 'plugin_environment_accounts',
-                           'domains' => 'plugin_environment_domains',
-                           'databases' => 'plugin_environment_databases',
-                           'badges' => 'plugin_environment_badges');
+      foreach ($DB->request('glpi_plugin_environment_profiles',
+         "`profiles_id`='$profiles_id'") as $profile_data) {
+
+         $matching = array('environment' => 'plugin_environment',
+            'appliances' => 'plugin_environment_appliances',
+            'webapplications' => 'plugin_environment_webapplications',
+            'certificates' => 'plugin_environment_certificates',
+            'accounts' => 'plugin_environment_accounts',
+            'domains' => 'plugin_environment_domains',
+            'databases' => 'plugin_environment_databases',
+            'badges' => 'plugin_environment_badges');
          $current_rights = ProfileRight::getProfileRights($profiles_id, array_values($matching));
          foreach ($matching as $old => $new) {
             if (!isset($current_rights[$old])) {
                $query = "UPDATE `glpi_profilerights` 
-                         SET `rights`='".self::translateARight($profile_data[$old])."' 
+                         SET `rights`='" . self::translateARight($profile_data[$old]) . "' 
                          WHERE `name`='$new' AND `profiles_id`='$profiles_id'";
                $DB->query($query);
             }
          }
       }
    }
-   
+
    /**
-   * Initialize profiles, and migrate it necessary
-   */
-   static function initProfile() {
+    * Initialize profiles, and migrate it necessary
+    */
+   static function initProfile()
+   {
       global $DB;
       $profile = new self();
 
       //Add new rights in glpi_profilerights table
       foreach ($profile->getAllRights(true) as $data) {
-         if (countElementsInTable("glpi_profilerights", 
-                                  "`name` = '".$data['field']."'") == 0) {
+         if (countElementsInTable("glpi_profilerights",
+               "`name` = '" . $data['field'] . "'") == 0
+         ) {
             ProfileRight::addProfileRights(array($data['field']));
          }
       }
-      
+
       //Migration old rights in new ones
       foreach ($DB->request("SELECT `id` FROM `glpi_profiles`") as $prof) {
          self::migrateOneProfile($prof['id']);
       }
       foreach ($DB->request("SELECT *
                            FROM `glpi_profilerights` 
-                           WHERE `profiles_id`='".$_SESSION['glpiactiveprofile']['id']."' 
+                           WHERE `profiles_id`='" . $_SESSION['glpiactiveprofile']['id'] . "' 
                               AND `name` LIKE '%plugin_environment%'") as $prof) {
-         $_SESSION['glpiactiveprofile'][$prof['name']] = $prof['rights']; 
+         $_SESSION['glpiactiveprofile'][$prof['name']] = $prof['rights'];
       }
    }
 
 
-   static function removeRightsFromSession() {
+   static function removeRightsFromSession()
+   {
       foreach (self::getAllRights(true) as $right) {
          if (isset($_SESSION['glpiactiveprofile'][$right['field']])) {
             unset($_SESSION['glpiactiveprofile'][$right['field']]);
@@ -275,4 +317,3 @@ class PluginEnvironmentProfile extends CommonDBTM {
       }
    }
 }
-?>

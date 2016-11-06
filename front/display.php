@@ -27,13 +27,14 @@
  --------------------------------------------------------------------------
  */
 
-include ('../../../inc/includes.php');
+include('../../../inc/includes.php');
 
-Html::header(PluginEnvironmentDisplay::getTypeName(2), '', "assets","pluginenvironmentdisplay");
+Html::header(PluginEnvironmentDisplay::getTypeName(2), '', "assets", "pluginenvironmentdisplay");
 
-if(Session::haveRight("plugin_environment", READ) 
-      || Session::haveRight("config",UPDATE)) {
-   
+if (Session::haveRight("plugin_environment", READ)
+   || Session::haveRight("config", UPDATE)
+) {
+
    $env = new PluginEnvironmentDisplay();
    $env->display();
 
@@ -42,5 +43,3 @@ if(Session::haveRight("plugin_environment", READ)
 }
 
 Html::footer();
-
-?>
