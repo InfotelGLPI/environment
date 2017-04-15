@@ -199,7 +199,7 @@ class PluginEnvironmentDisplay extends CommonGLPI
          echo "<tr>";
          echo "<th class='center top' colspan='2'>";
          echo "<a href=\"" . $CFG_GLPI["root_doc"] . "/plugins/appliances/front/appliance.php\">";
-         _e('Appliances', 'environment');
+         echo __('Appliances', 'environment');
          echo "</th></tr>";
 
          $query = "SELECT COUNT(`glpi_plugin_appliances_appliances`.`id`) AS total,
@@ -249,7 +249,7 @@ class PluginEnvironmentDisplay extends CommonGLPI
          echo "<tr>";
          echo "<th class='center top' colspan='2'>";
          echo "<a href=\"" . $CFG_GLPI["root_doc"] . "/plugins/webapplications/front/webapplication.php\">";
-         _e('Web applications', 'environment');
+         echo __('Web applications', 'environment');
          echo "</th></tr>";
 
          $query = "SELECT COUNT(`glpi_plugin_webapplications_webapplications`.`id`) AS total,
@@ -298,7 +298,7 @@ class PluginEnvironmentDisplay extends CommonGLPI
          echo "<tr>";
          echo "<th class='center top' colspan='2'>";
          echo "<a href=\"" . $CFG_GLPI["root_doc"] . "/plugins/certificates/front/certificate.php\">";
-         _e('Certificates', 'environment');
+         echo __('Certificates', 'environment');
          echo "</th></tr>";
 
          $query = "SELECT COUNT(`glpi_plugin_certificates_certificates`.`id`) AS total,
@@ -348,7 +348,7 @@ class PluginEnvironmentDisplay extends CommonGLPI
          echo "<tr>";
          echo "<th class='center top' colspan='2'>";
          echo "<a href=\"" . $CFG_GLPI["root_doc"] . "/plugins/accounts/front/account.php\">";
-         _e('Accounts', 'environment');
+         echo __('Accounts', 'environment');
          echo "</th></tr>";
 
          $who = Session::getLoginUserID();
@@ -452,7 +452,7 @@ class PluginEnvironmentDisplay extends CommonGLPI
          echo "<tr>";
          echo "<th class='center top' colspan='2'>";
          echo "<a href=\"" . $CFG_GLPI["root_doc"] . "/plugins/domains/front/domain.php\">";
-         _e('Domains', 'environment');
+         echo __('Domains', 'environment');
          echo "</th></tr>";
 
          $query = "SELECT COUNT(`glpi_plugin_domains_domains`.`id`) AS total,
@@ -502,7 +502,7 @@ class PluginEnvironmentDisplay extends CommonGLPI
          echo "<tr>";
          echo "<th class='center top' colspan='2'>";
          echo "<a href=\"" . $CFG_GLPI["root_doc"] . "/plugins/databases/front/database.php\">";
-         _e('Databases', 'environment');
+         echo __('Databases', 'environment');
          echo "</th></tr>";
 
          $query = "SELECT COUNT(`glpi_plugin_databases_databases`.`id`) AS total,
@@ -552,7 +552,7 @@ class PluginEnvironmentDisplay extends CommonGLPI
          echo "<tr>";
          echo "<th class='center top' colspan='2'>";
          echo "<a href=\"" . $CFG_GLPI["root_doc"] . "/plugins/badges/front/badge.php\">";
-         _e('Badges', 'environment');
+         echo __('Badges', 'environment');
          echo "</th></tr>";
 
          $query = "SELECT COUNT(`glpi_plugin_badges_badges`.`id`) AS total,
