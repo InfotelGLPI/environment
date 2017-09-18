@@ -30,24 +30,21 @@
 /**
  * @return bool
  */
-function plugin_environment_install()
-{
+function plugin_environment_install() {
    global $DB;
 
    include_once(GLPI_ROOT . "/plugins/environment/inc/profile.class.php");
 
    $update = false;
-   if (TableExists("glpi_plugin_environment_profiles")
-      && FieldExists("glpi_plugin_environment_profiles", "interface")
-   ) {
+   if ($DB->tableExists("glpi_plugin_environment_profiles")
+       && $DB->fieldExists("glpi_plugin_environment_profiles", "interface")) {
 
       $update = true;
       $DB->runFile(GLPI_ROOT . "/plugins/environment/sql/update-1.3.0.sql");
       $DB->runFile(GLPI_ROOT . "/plugins/environment/sql/update-1.4.0.sql");
 
-   } else if (TableExists("glpi_plugin_environment_profiles")
-      && FieldExists("glpi_plugin_environment_profiles", "connections")
-   ) {
+   } else if ($DB->tableExists("glpi_plugin_environment_profiles")
+              && $DB->fieldExists("glpi_plugin_environment_profiles", "connections")) {
 
       $update = true;
       $DB->runFile(GLPI_ROOT . "/plugins/environment/sql/update-1.4.0.sql");
@@ -56,7 +53,7 @@ function plugin_environment_install()
 
    if ($update) {
       //Do One time on 0.78
-      $query_ = "SELECT *
+      $query_  = "SELECT *
             FROM `glpi_plugin_environment_profiles` ";
       $result_ = $DB->query($query_);
       if ($DB->numrows($result_) > 0) {
@@ -88,8 +85,7 @@ function plugin_environment_install()
 /**
  * @return bool
  */
-function plugin_environment_uninstall()
-{
+function plugin_environment_uninstall() {
 
    return true;
 }

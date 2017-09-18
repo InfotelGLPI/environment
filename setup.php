@@ -28,8 +28,7 @@
  */
 
 // Init the hooks of the plugins -Needed
-function plugin_init_environment()
-{
+function plugin_init_environment() {
    global $PLUGIN_HOOKS;
 
    $PLUGIN_HOOKS['csrf_compliant']['environment'] = true;
@@ -39,7 +38,7 @@ function plugin_init_environment()
    if (Session::getLoginUserID()) {
 
       Plugin::registerClass('PluginEnvironmentProfile',
-         array('addtabon' => 'Profile'));
+                            array('addtabon' => 'Profile'));
 
       if (Session::haveRight("plugin_environment", READ)) {
 
@@ -53,16 +52,15 @@ function plugin_init_environment()
 /**
  * @return array
  */
-function plugin_version_environment()
-{
+function plugin_version_environment() {
 
    return array(
-      'name' => __('Environment', 'environment'),
-      'version' => '2.0.0',
-      'license' => 'GPLv2+',
-      'author' => "<a href='http://infotel.com/services/expertise-technique/glpi/'>Infotel</a>",
-      'homepage' => 'https://github.com/InfotelGLPI/environment',
-      'minGlpiVersion' => '0.90',
+      'name'           => __('Environment', 'environment'),
+      'version'        => '2.1.0',
+      'license'        => 'GPLv2+',
+      'author'         => "<a href='http://infotel.com/services/expertise-technique/glpi/'>Infotel</a>",
+      'homepage'       => 'https://github.com/InfotelGLPI/environment',
+      'minGlpiVersion' => '9.2',
    );
 
 }
@@ -71,10 +69,9 @@ function plugin_version_environment()
 /**
  * @return bool
  */
-function plugin_environment_check_prerequisites()
-{
-   if (version_compare(GLPI_VERSION, '0.90', 'lt') || version_compare(GLPI_VERSION, '9.2', 'ge')) {
-      echo __('This plugin requires GLPI >= 0.90', 'environment');
+function plugin_environment_check_prerequisites() {
+   if (version_compare(GLPI_VERSION, '9.2', 'lt') || version_compare(GLPI_VERSION, '9.3', 'ge')) {
+      echo __('This plugin requires GLPI >= 9.2');
       return false;
    }
    return true;
@@ -84,7 +81,6 @@ function plugin_environment_check_prerequisites()
 /**
  * @return bool
  */
-function plugin_environment_check_config()
-{
+function plugin_environment_check_config() {
    return true;
 }
