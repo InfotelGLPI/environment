@@ -71,7 +71,6 @@ class PluginEnvironmentProfile extends CommonDBTM {
                                       array('plugin_environment'                 => 0,
                                             'plugin_environment_appliances'      => 0,
                                             'plugin_environment_webapplications' => 0,
-                                            'plugin_environment_certificates'    => 0,
                                             'plugin_environment_accounts'        => 0,
                                             'plugin_environment_domains'         => 0,
                                             'plugin_environment_databases'       => 0,
@@ -90,7 +89,6 @@ class PluginEnvironmentProfile extends CommonDBTM {
                                    array('plugin_environment'                 => 1,
                                          'plugin_environment_appliances'      => 1,
                                          'plugin_environment_webapplications' => 1,
-                                         'plugin_environment_certificates'    => 1,
                                          'plugin_environment_accounts'        => 1,
                                          'plugin_environment_domains'         => 1,
                                          'plugin_environment_databases'       => 1,
@@ -186,10 +184,6 @@ class PluginEnvironmentProfile extends CommonDBTM {
                'field'  => 'plugin_environment_webapplications'
          ),
          array('rights' => array(READ => __('Read')),
-               'label'  => __('Certificates', 'environment'),
-               'field'  => 'plugin_environment_certificates'
-         ),
-         array('rights' => array(READ => __('Read')),
                'label'  => __('Accounts', 'environment'),
                'field'  => 'plugin_environment_accounts'
          ),
@@ -256,7 +250,6 @@ class PluginEnvironmentProfile extends CommonDBTM {
          $matching       = array('environment'     => 'plugin_environment',
                                  'appliances'      => 'plugin_environment_appliances',
                                  'webapplications' => 'plugin_environment_webapplications',
-                                 'certificates'    => 'plugin_environment_certificates',
                                  'accounts'        => 'plugin_environment_accounts',
                                  'domains'         => 'plugin_environment_domains',
                                  'databases'       => 'plugin_environment_databases',

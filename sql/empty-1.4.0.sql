@@ -9,8 +9,6 @@ CREATE TABLE `glpi_plugin_environment_profiles` (
                     COLLATE utf8_unicode_ci DEFAULT NULL,
   `webapplications` CHAR(1)
                     COLLATE utf8_unicode_ci DEFAULT NULL,
-  `certificates`    CHAR(1)
-                    COLLATE utf8_unicode_ci DEFAULT NULL,
   `accounts`        CHAR(1)
                     COLLATE utf8_unicode_ci DEFAULT NULL,
   `domains`         CHAR(1)
