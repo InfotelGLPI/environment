@@ -38,7 +38,7 @@ class PluginEnvironmentDisplay extends CommonGLPI
 {
 
    static $rightname = "plugin_environment";
-   static $plugins = array('appliances', 'webapplications', 'certificates', 'accounts', 'databases', 'domains', 'badges');
+   static $plugins = array('appliances', 'webapplications',  'accounts', 'databases', 'domains', 'badges');
 
    /**
     * @param int $nb
@@ -67,8 +67,8 @@ class PluginEnvironmentDisplay extends CommonGLPI
          if ($plugin->isActivated($plug)) {
             if (Session::haveRight("plugin_" . $plug, READ)) {
                $table = "glpi_plugin_" . $plug . "_" . $plug;
-
-               $itemtype = getItemTypeForTable($table);
+               $dbu          = new DbUtils();
+               $itemtype = $dbu->getItemTypeForTable($table);
 
                if (!class_exists($itemtype)) {
                   continue;
@@ -144,8 +144,8 @@ class PluginEnvironmentDisplay extends CommonGLPI
             $plugin = new Plugin();
             if ($plugin->isActivated($plug)) {
                $table = "glpi_plugin_" . $plug . "_" . $plug;
-
-               $itemtype = getItemTypeForTable($table);
+               $dbu          = new DbUtils();
+               $itemtype = $dbu->getItemTypeForTable($table);
 
                if (!class_exists($itemtype)) {
                   continue;
@@ -201,7 +201,7 @@ class PluginEnvironmentDisplay extends CommonGLPI
          echo "<a href=\"" . $CFG_GLPI["root_doc"] . "/plugins/appliances/front/appliance.php\">";
          echo __('Appliances', 'environment');
          echo "</th></tr>";
-
+         $dbu          = new DbUtils();
          $query = "SELECT COUNT(`glpi_plugin_appliances_appliances`.`id`) AS total,
                               `glpi_plugin_appliances_appliancetypes`.`name` AS TYPE,
                               `glpi_plugin_appliances_appliances`.`entities_id` 
@@ -209,7 +209,7 @@ class PluginEnvironmentDisplay extends CommonGLPI
          $query .= " LEFT JOIN `glpi_plugin_appliances_appliancetypes` ON (`glpi_plugin_appliances_appliances`.`plugin_appliances_appliancetypes_id` = `glpi_plugin_appliances_appliancetypes`.`id`) ";
          $query .= " LEFT JOIN `glpi_entities` ON (`glpi_entities`.`id` = `glpi_plugin_appliances_appliances`.`entities_id`) ";
          $query .= "WHERE `glpi_plugin_appliances_appliances`.`is_deleted` = '0' "
-            . getEntitiesRestrictRequest(" AND ", "glpi_plugin_appliances_appliances", '', '', true);
+            . $dbu->getEntitiesRestrictRequest(" AND ", "glpi_plugin_appliances_appliances", '', '', true);
          $query .= "GROUP BY `glpi_plugin_appliances_appliances`.`entities_id`,`TYPE`
                ORDER BY `glpi_entities`.`completename`, `glpi_plugin_appliances_appliancetypes`.`name`";
 
@@ -251,7 +251,7 @@ class PluginEnvironmentDisplay extends CommonGLPI
          echo "<a href=\"" . $CFG_GLPI["root_doc"] . "/plugins/webapplications/front/webapplication.php\">";
          echo __('Web applications', 'environment');
          echo "</th></tr>";
-
+         $dbu          = new DbUtils();
          $query = "SELECT COUNT(`glpi_plugin_webapplications_webapplications`.`id`) AS total,
                         `glpi_plugin_webapplications_webapplicationtypes`.`name` AS TYPE,
                         `glpi_plugin_webapplications_webapplications`.`entities_id` 
@@ -259,7 +259,7 @@ class PluginEnvironmentDisplay extends CommonGLPI
          $query .= " LEFT JOIN `glpi_plugin_webapplications_webapplicationtypes` ON (`glpi_plugin_webapplications_webapplications`.`plugin_webapplications_webapplicationtypes_id` = `glpi_plugin_webapplications_webapplicationtypes`.`id`) ";
          $query .= " LEFT JOIN `glpi_entities` ON (`glpi_entities`.`id`=`glpi_plugin_webapplications_webapplications`.`entities_id`) ";
          $query .= "WHERE `glpi_plugin_webapplications_webapplications`.`is_deleted` = '0' "
-            . getEntitiesRestrictRequest(" AND ", "glpi_plugin_webapplications_webapplications", '', '', true);
+            . $dbu->getEntitiesRestrictRequest(" AND ", "glpi_plugin_webapplications_webapplications", '', '', true);
          $query .= "GROUP BY `glpi_plugin_webapplications_webapplications`.`entities_id`,`TYPE`
                ORDER BY `glpi_entities`.`completename`, `glpi_plugin_webapplications_webapplicationtypes`.`name` ";
          $result = $DB->query($query);
@@ -284,56 +284,6 @@ class PluginEnvironmentDisplay extends CommonGLPI
             }
          } else
             echo "<tr><th colspan='2'>" . __('Web applications', 'environment') . " : 0</th></tr>";
-
-         echo "</table><br>";
-      }
-   }
-
-   static function showcertificates()
-   {
-      global $CFG_GLPI, $DB;
-
-      if (Session::haveRight("plugin_environment_certificates", READ)) {
-         echo "<table class='tab_cadrehov' width='750px'>";
-         echo "<tr>";
-         echo "<th class='center top' colspan='2'>";
-         echo "<a href=\"" . $CFG_GLPI["root_doc"] . "/plugins/certificates/front/certificate.php\">";
-         echo __('Certificates', 'environment');
-         echo "</th></tr>";
-
-         $query = "SELECT COUNT(`glpi_plugin_certificates_certificates`.`id`) AS total,
-                        `glpi_plugin_certificates_certificatetypes`.`name` AS TYPE,
-                        `glpi_plugin_certificates_certificates`.`entities_id` 
-                  FROM `glpi_plugin_certificates_certificates` ";
-         $query .= " LEFT JOIN `glpi_plugin_certificates_certificatetypes` ON (`glpi_plugin_certificates_certificates`.`plugin_certificates_certificatetypes_id` = `glpi_plugin_certificates_certificatetypes`.`id`) ";
-         $query .= " LEFT JOIN `glpi_entities` ON (`glpi_entities`.`id` = `glpi_plugin_certificates_certificates`.`entities_id`) ";
-         $query .= "WHERE `glpi_plugin_certificates_certificates`.`is_deleted` = '0' "
-            . getEntitiesRestrictRequest(" AND ", "glpi_plugin_certificates_certificates", '', '', true);
-         $query .= "GROUP BY `glpi_plugin_certificates_certificates`.`entities_id`,`TYPE`
-               ORDER BY `glpi_entities`.`completename`, `glpi_plugin_certificates_certificatetypes`.`name` ";
-
-         $result = $DB->query($query);
-         if ($DB->numrows($result)) {
-            echo "<tr><th colspan='2'>" . __('Certificates', 'environment') . " : </th></tr>";
-            while ($data = $DB->fetch_array($result)) {
-               echo "<tr class='tab_bg_1'>";
-               $link = "";
-               if (Session::isMultiEntitiesMode()) {
-                  echo "<td class='left top'>" . Dropdown::getDropdownName("glpi_entities", $data["entities_id"]) . "</td>";
-                  if ($data["entities_id"] == 0) {
-                     $link = "&criteria[1][link]=AND&criteria[1][searchtype]=contains&criteria[1][value]=-1&criteria[1][field]=81";
-                  } else {
-                     $link = "&criteria[1][link]=AND&criteria[1][searchtype]=equals&criteria[1][value]=" . $data["entities_id"] . "&criteria[1][field]=80";
-                  }
-               }
-               if (empty($data["TYPE"]))
-                  echo "<td><a href='" . $CFG_GLPI["root_doc"] . "/plugins/certificates/front/certificate.php?glpisearchcount=2&criteria[0][searchtype]=contains&criteria[0][value]=NULL&criteria[0][field]=2$link&is_deleted=0&itemtype=PluginCertificatesCertificate&start=0'>" . $data["total"] . " " . __('Without type', 'environment') . "</a></td>";
-               else
-                  echo "<td><a href='" . $CFG_GLPI["root_doc"] . "/plugins/certificates/front/certificate.php?glpisearchcount=2&criteria[0][searchtype]=contains&criteria[0][value]=" . rawurlencode($data["TYPE"]) . "&criteria[0][field]=2$link&is_deleted=0&itemtype=PluginCertificatesCertificate&start=0'>" . $data["total"] . " " . $data["TYPE"] . "</a></td>";
-               echo "</tr>";
-            }
-         } else
-            echo "<tr><th colspan='2'>" . __('Certificates', 'environment') . " : 0</th></tr>";
 
          echo "</table><br>";
       }
@@ -383,8 +333,9 @@ class PluginEnvironmentDisplay extends CommonGLPI
                $query .= " $ASSIGN ";
             }
          }
+         $dbu          = new DbUtils();
          $query .= " `glpi_plugin_accounts_accounts`.`is_deleted` = '0' "
-            . getEntitiesRestrictRequest(" AND ", "glpi_plugin_accounts_accounts", '', '', true);
+            . $dbu->getEntitiesRestrictRequest(" AND ", "glpi_plugin_accounts_accounts", '', '', true);
          $query .= "GROUP BY `glpi_plugin_accounts_accounts`.`entities_id`,`TYPE`
                ORDER BY `glpi_entities`.`completename`, `glpi_plugin_accounts_accounttypes`.`name`";
 
@@ -454,7 +405,7 @@ class PluginEnvironmentDisplay extends CommonGLPI
          echo "<a href=\"" . $CFG_GLPI["root_doc"] . "/plugins/domains/front/domain.php\">";
          echo __('Domains', 'environment');
          echo "</th></tr>";
-
+         $dbu          = new DbUtils();
          $query = "SELECT COUNT(`glpi_plugin_domains_domains`.`id`) AS total,
                               `glpi_plugin_domains_domaintypes`.`name` AS TYPE,
                               `glpi_plugin_domains_domains`.`entities_id` 
@@ -462,7 +413,7 @@ class PluginEnvironmentDisplay extends CommonGLPI
          $query .= " LEFT JOIN `glpi_plugin_domains_domaintypes` ON (`glpi_plugin_domains_domains`.`plugin_domains_domaintypes_id` = `glpi_plugin_domains_domaintypes`.`id`) ";
          $query .= " LEFT JOIN `glpi_entities` ON (`glpi_entities`.`id` = `glpi_plugin_domains_domains`.`entities_id`) ";
          $query .= "WHERE `glpi_plugin_domains_domains`.`is_deleted` = '0' "
-            . getEntitiesRestrictRequest(" AND ", "glpi_plugin_domains_domains", '', '', true);
+            . $dbu->getEntitiesRestrictRequest(" AND ", "glpi_plugin_domains_domains", '', '', true);
          $query .= "GROUP BY `glpi_plugin_domains_domains`.`entities_id`,`TYPE`
                ORDER BY `glpi_entities`.`completename`, `glpi_plugin_domains_domaintypes`.`name` ";
 
@@ -504,7 +455,7 @@ class PluginEnvironmentDisplay extends CommonGLPI
          echo "<a href=\"" . $CFG_GLPI["root_doc"] . "/plugins/databases/front/database.php\">";
          echo __('Databases', 'environment');
          echo "</th></tr>";
-
+         $dbu          = new DbUtils();
          $query = "SELECT COUNT(`glpi_plugin_databases_databases`.`id`) AS total,
                               `glpi_plugin_databases_databasetypes`.`name` AS TYPE,
                               `glpi_plugin_databases_databases`.`entities_id` 
@@ -512,7 +463,7 @@ class PluginEnvironmentDisplay extends CommonGLPI
          $query .= " LEFT JOIN `glpi_plugin_databases_databasetypes` ON (`glpi_plugin_databases_databases`.`plugin_databases_databasetypes_id` = `glpi_plugin_databases_databasetypes`.`id`) ";
          $query .= " LEFT JOIN `glpi_entities` ON (`glpi_entities`.`id` = `glpi_plugin_databases_databases`.`entities_id`) ";
          $query .= "WHERE `glpi_plugin_databases_databases`.`is_deleted` = '0' "
-            . getEntitiesRestrictRequest(" AND ", "glpi_plugin_databases_databases", '', '', true);
+            . $dbu->getEntitiesRestrictRequest(" AND ", "glpi_plugin_databases_databases", '', '', true);
          $query .= "GROUP BY `glpi_plugin_databases_databases`.`entities_id`,`TYPE`
                ORDER BY `glpi_entities`.`completename`, `glpi_plugin_databases_databasetypes`.`name`";
 
@@ -546,7 +497,7 @@ class PluginEnvironmentDisplay extends CommonGLPI
    static function showbadges()
    {
       global $CFG_GLPI, $DB;
-
+      $dbu          = new DbUtils();
       if (Session::haveRight("plugin_environment_badges", READ)) {
          echo "<table class='tab_cadrehov' width='750px'>";
          echo "<tr>";
@@ -562,7 +513,7 @@ class PluginEnvironmentDisplay extends CommonGLPI
          $query .= " LEFT JOIN `glpi_plugin_badges_badgetypes` ON (`glpi_plugin_badges_badges`.`plugin_badges_badgetypes_id` = `glpi_plugin_badges_badgetypes`.`id`) ";
          $query .= " LEFT JOIN `glpi_entities` ON (`glpi_entities`.`id` = `glpi_plugin_badges_badges`.`entities_id`) ";
          $query .= "WHERE `glpi_plugin_badges_badges`.`is_deleted` = '0' "
-            . getEntitiesRestrictRequest(" AND ", "glpi_plugin_badges_badges", '', '', false);
+            . $dbu->getEntitiesRestrictRequest(" AND ", "glpi_plugin_badges_badges", '', '', false);
          $query .= "GROUP BY `glpi_plugin_badges_badges`.`entities_id`,`TYPE`
                ORDER BY `glpi_entities`.`completename`, `glpi_plugin_badges_badgetypes`.`name` ";
 

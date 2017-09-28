@@ -74,7 +74,7 @@ function plugin_environment_install() {
 
    PluginEnvironmentProfile::initProfile();
    PluginEnvironmentProfile::createFirstAccess($_SESSION['glpiactiveprofile']['id']);
-   $migration = new Migration("2..0");
+   $migration = new Migration("2.0.0");
    $migration->dropTable('glpi_plugin_environment_profiles');
 
    $_SESSION["glpi_plugin_environment_installed"] = 1;
