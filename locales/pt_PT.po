@@ -3,8 +3,6 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# Le Rohellec Benoit <blerohellec@hotmail.com>, 2015
-# Xavier CAILLAUD <thetsmr@gmail.com>, 2012
 msgid ""
 msgstr ""
 "Project-Id-Version: GLPI Project - environment plugin\n"
@@ -12,16 +10,16 @@ msgstr ""
 "POT-Creation-Date: 2015-09-17 10:55+0200\n"
 "PO-Revision-Date: 2017-09-28 13:14+0000\n"
 "Last-Translator: Xavier CAILLAUD <thetsmr@gmail.com>\n"
-"Language-Team: Spanish (Spain) (http://www.transifex.com/tsmr/GLPI_environment/language/es_ES/)\n"
+"Language-Team: Portuguese (Portugal) (http://www.transifex.com/tsmr/GLPI_environment/language/pt_PT/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: es_ES\n"
+"Language: pt_PT\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: setup.php:55 inc/display.class.php:41 inc/profile.class.php:149
 msgid "Environment"
-msgstr "Entorno"
+msgstr ""
 
 #: setup.php:68
 msgid "This plugin requires GLPI >= 0.90"
@@ -30,7 +28,7 @@ msgstr ""
 #: inc/display.class.php:151 inc/display.class.php:167
 #: inc/display.class.php:186 inc/profile.class.php:153
 msgid "Appliances"
-msgstr "Aplicativos"
+msgstr ""
 
 #: inc/display.class.php:180 inc/display.class.php:228
 #: inc/display.class.php:277 inc/display.class.php:360
@@ -38,34 +36,34 @@ msgstr "Aplicativos"
 #: inc/display.class.php:429 inc/display.class.php:478
 #: inc/display.class.php:527
 msgid "Without type"
-msgstr "Sin tipo"
+msgstr ""
 
 #: inc/display.class.php:200 inc/display.class.php:215
 #: inc/display.class.php:234 inc/profile.class.php:157
 msgid "Web applications"
-msgstr "Aplicativos web"
+msgstr ""
 
 #: inc/display.class.php:248 inc/display.class.php:264
 #: inc/display.class.php:283 inc/profile.class.php:161
 msgid "Certificates"
-msgstr "Certificados"
+msgstr ""
 
 #: inc/display.class.php:297 inc/display.class.php:339
 #: inc/display.class.php:386 inc/profile.class.php:165
 msgid "Accounts"
-msgstr "Cuentas"
+msgstr ""
 
 #: inc/display.class.php:400 inc/display.class.php:416
 #: inc/display.class.php:435 inc/profile.class.php:169
 msgid "Domains"
-msgstr "Dominios"
+msgstr ""
 
 #: inc/display.class.php:449 inc/display.class.php:465
 #: inc/display.class.php:484 inc/profile.class.php:173
 msgid "Databases"
-msgstr "Bases de datos"
+msgstr ""
 
 #: inc/display.class.php:498 inc/display.class.php:514
 #: inc/display.class.php:533 inc/profile.class.php:177
 msgid "Badges"
-msgstr "Tarjetas identificadoras"
+msgstr ""

@@ -24,6 +24,10 @@
     </authors>
     <versions>
         <version>
+            <num>2.1.0</num>
+            <compatibility>9.2</compatibility>
+        </version>
+        <version>
             <num>2.0.0</num>
             <compatibility>9.1</compatibility>
         </version>
@@ -79,6 +83,7 @@
         <lang>nl_NL</lang>
         <lang>pl_PL</lang>
         <lang>pt_BR</lang>
+        <lang>pt_PT</lang>
         <lang>tr_TR</lang>
     </langs>
     <license><![CDATA[GPL v2+]]></license>
