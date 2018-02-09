@@ -9,7 +9,7 @@
  -------------------------------------------------------------------------
 
  LICENSE
-      
+
  This file is part of environmen.
 
  environmen is free software; you can redistribute it and/or modify
@@ -33,16 +33,16 @@ function plugin_init_environment() {
 
    $PLUGIN_HOOKS['csrf_compliant']['environment'] = true;
    $PLUGIN_HOOKS['change_profile']['environment'] =
-      array('PluginEnvironmentProfile', 'initProfile');
+      ['PluginEnvironmentProfile', 'initProfile'];
 
    if (Session::getLoginUserID()) {
 
       Plugin::registerClass('PluginEnvironmentProfile',
-                            array('addtabon' => 'Profile'));
+                            ['addtabon' => 'Profile']);
 
       if (Session::haveRight("plugin_environment", READ)) {
 
-         $PLUGIN_HOOKS['menu_toadd']['environment'] = array('assets' => 'PluginEnvironmentDisplay');
+         $PLUGIN_HOOKS['menu_toadd']['environment'] = ['assets' => 'PluginEnvironmentDisplay'];
 
       }
    }
@@ -54,14 +54,14 @@ function plugin_init_environment() {
  */
 function plugin_version_environment() {
 
-   return array(
+   return [
       'name'           => __('Environment', 'environment'),
       'version'        => '2.1.0',
       'license'        => 'GPLv2+',
       'author'         => "<a href='http://infotel.com/services/expertise-technique/glpi/'>Infotel</a>",
       'homepage'       => 'https://github.com/InfotelGLPI/environment',
       'minGlpiVersion' => '9.2',
-   );
+   ];
 
 }
 

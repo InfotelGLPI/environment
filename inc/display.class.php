@@ -9,7 +9,7 @@
  -------------------------------------------------------------------------
 
  LICENSE
-      
+
  This file is part of environmen.
 
  environmen is free software; you can redistribute it and/or modify
@@ -38,14 +38,13 @@ class PluginEnvironmentDisplay extends CommonGLPI
 {
 
    static $rightname = "plugin_environment";
-   static $plugins = array('appliances', 'webapplications',  'accounts', 'databases', 'domains', 'badges');
+   static $plugins = ['appliances', 'webapplications',  'accounts', 'databases', 'domains', 'badges'];
 
    /**
     * @param int $nb
     * @return translated
     */
-   static function getTypeName($nb = 0)
-   {
+   static function getTypeName($nb = 0) {
 
       return __('Environment', 'environment');
    }
@@ -53,11 +52,10 @@ class PluginEnvironmentDisplay extends CommonGLPI
    /**
     * @return array
     */
-   static function getMenuContent()
-   {
+   static function getMenuContent() {
       global $CFG_GLPI;
 
-      $menu = array();
+      $menu = [];
       $menu['title'] = self::getMenuName();
       $menu['page'] = "/plugins/environment/front/display.php";
 
@@ -105,8 +103,7 @@ class PluginEnvironmentDisplay extends CommonGLPI
       return $menu;
    }
 
-   static function removeRightsFromSession()
-   {
+   static function removeRightsFromSession() {
       if (isset($_SESSION['glpimenu']['assets']['types']['PluginEnvironmentDisplay'])) {
          unset($_SESSION['glpimenu']['assets']['types']['PluginEnvironmentDisplay']);
       }
@@ -120,9 +117,8 @@ class PluginEnvironmentDisplay extends CommonGLPI
     * @param array $options
     * @return array
     */
-   function defineTabs($options = array())
-   {
-      $ong = array();
+   function defineTabs($options = []) {
+      $ong = [];
       $this->addStandardTab(__CLASS__, $ong, $options);
       return $ong;
    }
@@ -133,9 +129,8 @@ class PluginEnvironmentDisplay extends CommonGLPI
     * @param int $withtemplate
     * @return array|string
     */
-   function getTabNameForItem(CommonGLPI $item, $withtemplate = 0)
-   {
-      $tabs = array();
+   function getTabNameForItem(CommonGLPI $item, $withtemplate = 0) {
+      $tabs = [];
       if ($item->getType() == __CLASS__) {
 
          $plugs = self::$plugins;
@@ -167,11 +162,10 @@ class PluginEnvironmentDisplay extends CommonGLPI
     * @param int $withtemplate
     * @return bool
     */
-   static function displayTabContentForItem(CommonGLPI $item, $tabnum = 1, $withtemplate = 0)
-   {
+   static function displayTabContentForItem(CommonGLPI $item, $tabnum = 1, $withtemplate = 0) {
 
       $plugs = self::$plugins;
-      $tab = array();
+      $tab = [];
       $nb = 1;
       foreach ($plugs as $plug) {
          $plugin = new Plugin();
@@ -190,8 +184,7 @@ class PluginEnvironmentDisplay extends CommonGLPI
    }
 
 
-   static function showappliances()
-   {
+   static function showappliances() {
       global $CFG_GLPI, $DB;
 
       if (Session::haveRight("plugin_environment_appliances", READ)) {
@@ -227,21 +220,22 @@ class PluginEnvironmentDisplay extends CommonGLPI
                      $link = "&criteria[1][link]=AND&criteria[1][searchtype]=equals&criteria[1][value]=" . $data["entities_id"] . "&criteria[1][field]=80";
                   }
                }
-               if (empty($data["TYPE"]))
+               if (empty($data["TYPE"])) {
                   echo "<td><a href='" . $CFG_GLPI["root_doc"] . "/plugins/appliances/front/appliance.php?glpisearchcount=2&criteria[0][searchtype]=contains&criteria[0][value]=NULL&criteria[0][field]=2$link&is_deleted=0&itemtype=PluginAppliancesAppliance&start=0'>" . $data["total"] . " " . __('Without type', 'environment') . "</a></td>";
-               else
+               } else {
                   echo "<td><a href='" . $CFG_GLPI["root_doc"] . "/plugins/appliances/front/appliance.php?glpisearchcount=2&criteria[0][searchtype]=contains&criteria[0][value]=" . rawurlencode($data["TYPE"]) . "&criteria[0][field]=2$link&is_deleted=0&itemtype=PluginAppliancesAppliance&start=0'>" . $data["total"] . " " . $data["TYPE"] . "</a></td>";
+               }
                echo "</tr>";
             }
-         } else
+         } else {
             echo "<tr><th colspan='2'>" . __('Appliances', 'environment') . " : 0</th></tr>";
+         }
 
          echo "</table><br>";
       }
    }
 
-   static function showwebapplications()
-   {
+   static function showwebapplications() {
       global $CFG_GLPI, $DB;
 
       if (Session::haveRight("plugin_environment_webapplications", READ)) {
@@ -276,21 +270,22 @@ class PluginEnvironmentDisplay extends CommonGLPI
                      $link = "&criteria[1][link]=AND&criteria[1][searchtype]=equals&criteria[1][value]=" . $data["entities_id"] . "&criteria[1][field]=80";
                   }
                }
-               if (empty($data["TYPE"]))
+               if (empty($data["TYPE"])) {
                   echo "<td><a href='" . $CFG_GLPI["root_doc"] . "/plugins/webapplications/front/webapplication.php?glpisearchcount=2&criteria[0][searchtype]=contains&criteria[0][value]=NULL&criteria[0][field]=2$link&is_deleted=0&itemtype=PluginWebapplicationsWebapplication&start=0'>" . $data["total"] . " " . __('Without type', 'environment') . "</a></td>";
-               else
+               } else {
                   echo "<td><a href='" . $CFG_GLPI["root_doc"] . "/plugins/webapplications/front/webapplication.php?glpisearchcount=2&criteria[0][searchtype]=contains&criteria[0][value]=" . rawurlencode($data["TYPE"]) . "&criteria[0][field]=2$link&is_deleted=0&itemtype=PluginWebapplicationsWebapplication&start=0'>" . $data["total"] . " " . $data["TYPE"] . "</a></td>";
+               }
                echo "</tr>";
             }
-         } else
+         } else {
             echo "<tr><th colspan='2'>" . __('Web applications', 'environment') . " : 0</th></tr>";
+         }
 
          echo "</table><br>";
       }
    }
 
-   static function showaccounts()
-   {
+   static function showaccounts() {
       global $CFG_GLPI, $DB;
 
       if (Session::haveRight("plugin_environment_accounts", READ)) {
@@ -307,8 +302,11 @@ class PluginEnvironmentDisplay extends CommonGLPI
             $first_groups = true;
             $groups = "";
             foreach ($_SESSION['glpigroups'] as $val) {
-               if (!$first_groups) $groups .= ",";
-               else $first_groups = false;
+               if (!$first_groups) {
+                  $groups .= ",";
+               } else {
+                  $first_groups = false;
+               }
                $groups .= $val;
             }
             $ASSIGN = " (`glpi_plugin_accounts_accounts`.`groups_id` IN (SELECT DISTINCT `groups_id` 
@@ -387,15 +385,15 @@ class PluginEnvironmentDisplay extends CommonGLPI
                   }
                }
             }
-         } else
+         } else {
             echo "<tr><th colspan='2'>" . __('Accounts', 'environment') . " : 0</th></tr>";
+         }
 
          echo "</table><br>";
       }
    }
 
-   static function showdomains()
-   {
+   static function showdomains() {
       global $CFG_GLPI, $DB;
 
       if (Session::haveRight("plugin_environment_domains", READ)) {
@@ -431,21 +429,22 @@ class PluginEnvironmentDisplay extends CommonGLPI
                      $link = "&criteria[1][link]=AND&criteria[1][searchtype]=equals&criteria[1][value]=" . $data["entities_id"] . "&criteria[1][field]=80";
                   }
                }
-               if (empty($data["TYPE"]))
+               if (empty($data["TYPE"])) {
                   echo "<td><a href='" . $CFG_GLPI["root_doc"] . "/plugins/domains/front/domain.php?glpisearchcount=2&criteria[0][searchtype]=contains&criteria[0][value]=NULL&criteria[0][field]=2$link&is_deleted=0&itemtype=PluginDomainsDomain&start=0'>" . $data["total"] . " " . __('Without type', 'environment') . "</a></td>";
-               else
+               } else {
                   echo "<td><a href='" . $CFG_GLPI["root_doc"] . "/plugins/domains/front/domain.php?glpisearchcount=2&criteria[0][searchtype]=contains&criteria[0][value]=" . rawurlencode($data["TYPE"]) . "&criteria[0][field]=2$link&is_deleted=0&itemtype=PluginDomainsDomain&start=0'>" . $data["total"] . " " . $data["TYPE"] . "</a></td>";
+               }
                echo "</tr>";
             }
-         } else
+         } else {
             echo "<tr><th colspan='2'>" . __('Domains', 'environment') . " : 0</th></tr>";
+         }
 
          echo "</table><br>";
       }
    }
 
-   static function showdatabases()
-   {
+   static function showdatabases() {
       global $CFG_GLPI, $DB;
 
       if (Session::haveRight("plugin_environment_databases", READ)) {
@@ -481,21 +480,22 @@ class PluginEnvironmentDisplay extends CommonGLPI
                      $link = "&criteria[1][link]=AND&criteria[1][searchtype]=equals&criteria[1][value]=" . $data["entities_id"] . "&criteria[1][field]=80";
                   }
                }
-               if (empty($data["TYPE"]))
+               if (empty($data["TYPE"])) {
                   echo "<td><a href='" . $CFG_GLPI["root_doc"] . "/plugins/databases/front/database.php?glpisearchcount=2&criteria[0][searchtype]=contains&criteria[0][value]=NULL&criteria[0][field]=10$link&is_deleted=0&itemtype=PluginDatabasesDatabase&start=0'>" . $data["total"] . " " . __('Without type', 'environment') . "</a></td>";
-               else
+               } else {
                   echo "<td><a href='" . $CFG_GLPI["root_doc"] . "/plugins/databases/front/database.php?glpisearchcount=2&criteria[0][searchtype]=contains&criteria[0][value]=" . rawurlencode($data["TYPE"]) . "&criteria[0][field]=10$link&is_deleted=0&itemtype=PluginDatabasesDatabase&start=0'>" . $data["total"] . " " . $data["TYPE"] . "</a></td>";
+               }
                echo "</tr>";
             }
-         } else
+         } else {
             echo "<tr><th colspan='2'>" . __('Databases', 'environment') . " : 0</th></tr>";
+         }
 
          echo "</table><br>";
       }
    }
 
-   static function showbadges()
-   {
+   static function showbadges() {
       global $CFG_GLPI, $DB;
       $dbu          = new DbUtils();
       if (Session::haveRight("plugin_environment_badges", READ)) {
@@ -531,14 +531,16 @@ class PluginEnvironmentDisplay extends CommonGLPI
                      $link = "&criteria[1][link]=AND&criteria[1][searchtype]=equals&criteria[1][value]=" . $data["entities_id"] . "&criteria[1][field]=80";
                   }
                }
-               if (empty($data["TYPE"]))
+               if (empty($data["TYPE"])) {
                   echo "<td><a href='" . $CFG_GLPI["root_doc"] . "/plugins/badges/front/badge.php?glpisearchcount=2&criteria[0][searchtype]=contains&criteria[0][value]=NULL&criteria[0][field]=2$link&is_deleted=0&itemtype=PluginBadgesBadge&start=0'>" . $data["total"] . " " . __('Without type', 'environment') . "</a></td>";
-               else
+               } else {
                   echo "<td><a href='" . $CFG_GLPI["root_doc"] . "/plugins/badges/front/badge.php?glpisearchcount=2&criteria[0][searchtype]=contains&criteria[0][value]=" . rawurlencode($data["TYPE"]) . "&criteria[0][field]=2$link&is_deleted=0&itemtype=PluginBadgesBadge&start=0'>" . $data["total"] . " " . $data["TYPE"] . "</a></td>";
+               }
                echo "</tr>";
             }
-         } else
+         } else {
             echo "<tr><th colspan='2'>" . __('Badges', 'environment') . " : 0</th></tr>";
+         }
 
          echo "</table><br>";
       }

@@ -9,7 +9,7 @@
  -------------------------------------------------------------------------
 
  LICENSE
-      
+
  This file is part of environmen.
 
  environmen is free software; you can redistribute it and/or modify
@@ -68,13 +68,13 @@ class PluginEnvironmentProfile extends CommonDBTM {
          $prof = new self();
 
          self::addDefaultProfileInfos($ID,
-                                      array('plugin_environment'                 => 0,
+                                      ['plugin_environment'                 => 0,
                                             'plugin_environment_appliances'      => 0,
                                             'plugin_environment_webapplications' => 0,
                                             'plugin_environment_accounts'        => 0,
                                             'plugin_environment_domains'         => 0,
                                             'plugin_environment_databases'       => 0,
-                                            'plugin_environment_badges'          => 0));
+                                            'plugin_environment_badges'          => 0]);
          $prof->showForm($ID);
       }
       return true;
@@ -86,13 +86,13 @@ class PluginEnvironmentProfile extends CommonDBTM {
    static function createFirstAccess($ID) {
       //85
       self::addDefaultProfileInfos($ID,
-                                   array('plugin_environment'                 => 1,
+                                   ['plugin_environment'                 => 1,
                                          'plugin_environment_appliances'      => 1,
                                          'plugin_environment_webapplications' => 1,
                                          'plugin_environment_accounts'        => 1,
                                          'plugin_environment_domains'         => 1,
                                          'plugin_environment_databases'       => 1,
-                                         'plugin_environment_badges'          => 1), true);
+                                         'plugin_environment_badges'          => 1], true);
    }
 
    /**
@@ -108,7 +108,7 @@ class PluginEnvironmentProfile extends CommonDBTM {
       foreach ($rights as $right => $value) {
          if ($dbu->countElementsInTable('glpi_profilerights',
                                   "`profiles_id`='$profiles_id' AND `name`='$right'") && $drop_existing) {
-            $profileRight->deleteByCriteria(array('profiles_id' => $profiles_id, 'name' => $right));
+            $profileRight->deleteByCriteria(['profiles_id' => $profiles_id, 'name' => $right]);
          }
          if (!$dbu->countElementsInTable('glpi_profilerights',
                                    "`profiles_id`='$profiles_id' AND `name`='$right'")) {
@@ -134,10 +134,10 @@ class PluginEnvironmentProfile extends CommonDBTM {
     * @internal param int $items_id id of the profile
     * @internal param value $target url of target
     */
-   function showForm($profiles_id = 0, $openform = TRUE, $closeform = TRUE) {
+   function showForm($profiles_id = 0, $openform = true, $closeform = true) {
 
       echo "<div class='firstbloc'>";
-      if (($canedit = Session::haveRightsOr(self::$rightname, array(CREATE, UPDATE, PURGE)))
+      if (($canedit = Session::haveRightsOr(self::$rightname, [CREATE, UPDATE, PURGE]))
           && $openform) {
          $profile = new Profile();
          echo "<form method='post' action='" . $profile->getFormURL() . "'>";
@@ -147,16 +147,16 @@ class PluginEnvironmentProfile extends CommonDBTM {
       $profile->getFromDB($profiles_id);
       if ($profile->getField('interface') == 'central') {
          $rights = $this->getAllRights();
-         $profile->displayRightsChoiceMatrix($rights, array('canedit'       => $canedit,
+         $profile->displayRightsChoiceMatrix($rights, ['canedit'       => $canedit,
                                                             'default_class' => 'tab_bg_2',
-                                                            'title'         => __('General')));
+                                                            'title'         => __('General')]);
       }
 
       if ($canedit
           && $closeform) {
          echo "<div class='center'>";
-         echo Html::hidden('id', array('value' => $profiles_id));
-         echo Html::submit(_sx('button', 'Save'), array('name' => 'update'));
+         echo Html::hidden('id', ['value' => $profiles_id]);
+         echo Html::submit(_sx('button', 'Save'), ['name' => 'update']);
          echo "</div>\n";
          Html::closeForm();
       }
@@ -170,36 +170,36 @@ class PluginEnvironmentProfile extends CommonDBTM {
     */
    static function getAllRights($all = false) {
 
-      $rights = array(
-         array('rights' => array(READ => __('Read')),
+      $rights = [
+         ['rights' => [READ => __('Read')],
                'label'  => __('Environment', 'environment'),
                'field'  => 'plugin_environment'
-         ),
-         array('rights' => array(READ => __('Read')),
+         ],
+         ['rights' => [READ => __('Read')],
                'label'  => __('Appliances', 'environment'),
                'field'  => 'plugin_environment_appliances'
-         ),
-         array('rights' => array(READ => __('Read')),
+         ],
+         ['rights' => [READ => __('Read')],
                'label'  => __('Web applications', 'environment'),
                'field'  => 'plugin_environment_webapplications'
-         ),
-         array('rights' => array(READ => __('Read')),
+         ],
+         ['rights' => [READ => __('Read')],
                'label'  => __('Accounts', 'environment'),
                'field'  => 'plugin_environment_accounts'
-         ),
-         array('rights' => array(READ => __('Read')),
+         ],
+         ['rights' => [READ => __('Read')],
                'label'  => __('Domains', 'environment'),
                'field'  => 'plugin_environment_domains'
-         ),
-         array('rights' => array(READ => __('Read')),
+         ],
+         ['rights' => [READ => __('Read')],
                'label'  => __('Databases', 'environment'),
                'field'  => 'plugin_environment_databases'
-         ),
-         array('rights' => array(READ => __('Read')),
+         ],
+         ['rights' => [READ => __('Read')],
                'label'  => __('Badges', 'environment'),
                'field'  => 'plugin_environment_badges'
-         ),
-      );
+         ],
+      ];
 
       return $rights;
    }
@@ -247,13 +247,13 @@ class PluginEnvironmentProfile extends CommonDBTM {
       foreach ($DB->request('glpi_plugin_environment_profiles',
                             "`profiles_id`='$profiles_id'") as $profile_data) {
 
-         $matching       = array('environment'     => 'plugin_environment',
+         $matching       = ['environment'     => 'plugin_environment',
                                  'appliances'      => 'plugin_environment_appliances',
                                  'webapplications' => 'plugin_environment_webapplications',
                                  'accounts'        => 'plugin_environment_accounts',
                                  'domains'         => 'plugin_environment_domains',
                                  'databases'       => 'plugin_environment_databases',
-                                 'badges'          => 'plugin_environment_badges');
+                                 'badges'          => 'plugin_environment_badges'];
          $current_rights = ProfileRight::getProfileRights($profiles_id, array_values($matching));
          foreach ($matching as $old => $new) {
             if (!isset($current_rights[$old])) {
@@ -277,7 +277,7 @@ class PluginEnvironmentProfile extends CommonDBTM {
       foreach ($profile->getAllRights(true) as $data) {
          if ($dbu->countElementsInTable("glpi_profilerights",
                                   "`name` = '" . $data['field'] . "'") == 0) {
-            ProfileRight::addProfileRights(array($data['field']));
+            ProfileRight::addProfileRights([$data['field']]);
          }
       }
 
