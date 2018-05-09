@@ -1,6 +1,6 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Environment Development Team
-# This file is distributed under the same license as the PACKAGE package.
+# This file is distributed under the same license as the GLPI - Environment plugin package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: GLPI - Environment plugin 1.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-26 09:50+0200\n"
+"POT-Creation-Date: 2018-05-09 08:44+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,59 +18,49 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: setup.php:55 inc/display.class.php:41 inc/profile.class.php:149
+#: setup.php:58 inc/display.class.php:49 inc/profile.class.php:175
 msgid "Environment"
 msgstr ""
 
-#: setup.php:68
-msgid "This plugin requires GLPI >= 0.90"
-msgstr ""
-
-#: inc/display.class.php:75 inc/display.class.php:76
+#: inc/display.class.php:86 inc/display.class.php:87
 msgid "Encryption key"
 msgid_plural "Encryption keys"
 msgstr[0] ""
 msgstr[1] ""
 
-#: inc/display.class.php:168 inc/display.class.php:184
-#: inc/display.class.php:203 inc/profile.class.php:153
+#: inc/display.class.php:195 inc/display.class.php:211
+#: inc/display.class.php:231 inc/profile.class.php:179
 msgid "Appliances"
 msgstr ""
 
-#: inc/display.class.php:197 inc/display.class.php:245
-#: inc/display.class.php:294 inc/display.class.php:377
-#: inc/display.class.php:379 inc/display.class.php:382
-#: inc/display.class.php:446 inc/display.class.php:495
-#: inc/display.class.php:544
+#: inc/display.class.php:224 inc/display.class.php:274
+#: inc/display.class.php:363 inc/display.class.php:365
+#: inc/display.class.php:368 inc/display.class.php:433
+#: inc/display.class.php:484 inc/display.class.php:535
 msgid "Without type"
 msgstr ""
 
-#: inc/display.class.php:217 inc/display.class.php:232
-#: inc/display.class.php:251 inc/profile.class.php:157
+#: inc/display.class.php:246 inc/display.class.php:261
+#: inc/display.class.php:281 inc/profile.class.php:183
 msgid "Web applications"
 msgstr ""
 
-#: inc/display.class.php:265 inc/display.class.php:281
-#: inc/display.class.php:300 inc/profile.class.php:161
-msgid "Certificates"
-msgstr ""
-
-#: inc/display.class.php:314 inc/display.class.php:356
-#: inc/display.class.php:403 inc/profile.class.php:165
+#: inc/display.class.php:296 inc/display.class.php:342
+#: inc/display.class.php:389 inc/profile.class.php:187
 msgid "Accounts"
 msgstr ""
 
-#: inc/display.class.php:417 inc/display.class.php:433
-#: inc/display.class.php:452 inc/profile.class.php:169
+#: inc/display.class.php:404 inc/display.class.php:420
+#: inc/display.class.php:440 inc/profile.class.php:191
 msgid "Domains"
 msgstr ""
 
-#: inc/display.class.php:466 inc/display.class.php:482
-#: inc/display.class.php:501 inc/profile.class.php:173
+#: inc/display.class.php:455 inc/display.class.php:471
+#: inc/display.class.php:491 inc/profile.class.php:195
 msgid "Databases"
 msgstr ""
 
-#: inc/display.class.php:515 inc/display.class.php:531
-#: inc/display.class.php:550 inc/profile.class.php:177
+#: inc/display.class.php:506 inc/display.class.php:522
+#: inc/display.class.php:542 inc/profile.class.php:199
 msgid "Badges"
 msgstr ""
