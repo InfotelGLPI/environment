@@ -32,7 +32,7 @@ include('../../../inc/includes.php');
 Html::header(PluginEnvironmentDisplay::getTypeName(2), '', "assets", "pluginenvironmentdisplay");
 
 if (Session::haveRight("plugin_environment", READ)
-   || Session::haveRight("config", UPDATE)
+    || Session::haveRight("config", UPDATE)
 ) {
 
    $env = new PluginEnvironmentDisplay();
