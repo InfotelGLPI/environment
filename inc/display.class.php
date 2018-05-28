@@ -34,14 +34,14 @@ if (!defined('GLPI_ROOT')) {
 /**
  * Class PluginEnvironmentDisplay
  */
-class PluginEnvironmentDisplay extends CommonGLPI
-{
+class PluginEnvironmentDisplay extends CommonGLPI {
 
    static $rightname = "plugin_environment";
-   static $plugins = ['appliances', 'webapplications',  'accounts', 'databases', 'domains', 'badges'];
+   static $plugins   = ['appliances', 'webapplications', 'accounts', 'databases', 'domains', 'badges'];
 
    /**
     * @param int $nb
+    *
     * @return translated
     */
    static function getTypeName($nb = 0) {
@@ -55,17 +55,17 @@ class PluginEnvironmentDisplay extends CommonGLPI
    static function getMenuContent() {
       global $CFG_GLPI;
 
-      $menu = [];
+      $menu          = [];
       $menu['title'] = self::getMenuName();
-      $menu['page'] = "/plugins/environment/front/display.php";
+      $menu['page']  = "/plugins/environment/front/display.php";
 
       $plugs = self::$plugins;
       foreach ($plugs as $plug) {
          $plugin = new Plugin();
          if ($plugin->isActivated($plug)) {
             if (Session::haveRight("plugin_" . $plug, READ)) {
-               $table = "glpi_plugin_" . $plug . "_" . $plug;
-               $dbu          = new DbUtils();
+               $table    = "glpi_plugin_" . $plug . "_" . $plug;
+               $dbu      = new DbUtils();
                $itemtype = $dbu->getItemTypeForTable($table);
 
                if (!class_exists($itemtype)) {
@@ -73,8 +73,8 @@ class PluginEnvironmentDisplay extends CommonGLPI
                }
                $item = new $itemtype();
 
-               $menu['options'][$plug]['title'] = $item::getTypeName();
-               $menu['options'][$plug]['page'] = $item::getSearchURL(false);
+               $menu['options'][$plug]['title']           = $item::getTypeName();
+               $menu['options'][$plug]['page']            = $item::getSearchURL(false);
                $menu['options'][$plug]['links']['search'] = $item::getSearchURL(false);
                if (Session::haveRight("plugin_" . $plug, CREATE)) {
                   $menu['options'][$plug]['links']['add'] = $item::getFormURL(false);
@@ -82,15 +82,15 @@ class PluginEnvironmentDisplay extends CommonGLPI
             }
 
             if ($plug == "accounts") {
-               $image = "<img src='" . $CFG_GLPI["root_doc"] . "/plugins/accounts/pics/cadenas.png' title='" .
-                  _n('Encryption key', 'Encryption keys', 2, 'accounts') . "' alt='" .
-                  _n('Encryption key', 'Encryption keys', 2, 'accounts') . "'>";
+               $image                                   = "<img src='" . $CFG_GLPI["root_doc"] . "/plugins/accounts/pics/cadenas.png' title='" .
+                                                          _n('Encryption key', 'Encryption keys', 2, 'accounts') . "' alt='" .
+                                                          _n('Encryption key', 'Encryption keys', 2, 'accounts') . "'>";
                $menu['options'][$plug]['links'][$image] = PluginAccountsHash::getSearchURL(false);
 
-               $menu['options']['hash']['title'] = PluginAccountsHash::getTypeName(2);
-               $menu['options']['hash']['page'] = PluginAccountsHash::getSearchURL(false);
+               $menu['options']['hash']['title']           = PluginAccountsHash::getTypeName(2);
+               $menu['options']['hash']['page']            = PluginAccountsHash::getSearchURL(false);
                $menu['options']['hash']['links']['search'] = PluginAccountsHash::getSearchURL(false);
-               $menu['options']['hash']['links'][$image] = PluginAccountsHash::getSearchURL(false);;
+               $menu['options']['hash']['links'][$image]   = PluginAccountsHash::getSearchURL(false);;
 
                if (PluginAccountsHash::canCreate()) {
                   $menu['options']['hash']['links']['add'] = PluginAccountsHash::getFormURL(false);
@@ -115,6 +115,7 @@ class PluginEnvironmentDisplay extends CommonGLPI
 
    /**
     * @param array $options
+    *
     * @return array
     */
    function defineTabs($options = []) {
@@ -126,7 +127,8 @@ class PluginEnvironmentDisplay extends CommonGLPI
 
    /**
     * @param CommonGLPI $item
-    * @param int $withtemplate
+    * @param int        $withtemplate
+    *
     * @return array|string
     */
    function getTabNameForItem(CommonGLPI $item, $withtemplate = 0) {
@@ -134,18 +136,18 @@ class PluginEnvironmentDisplay extends CommonGLPI
       if ($item->getType() == __CLASS__) {
 
          $plugs = self::$plugins;
-         $nb = 1;
+         $nb    = 1;
          foreach ($plugs as $plug) {
             $plugin = new Plugin();
             if ($plugin->isActivated($plug)) {
-               $table = "glpi_plugin_" . $plug . "_" . $plug;
-               $dbu          = new DbUtils();
+               $table    = "glpi_plugin_" . $plug . "_" . $plug;
+               $dbu      = new DbUtils();
                $itemtype = $dbu->getItemTypeForTable($table);
 
                if (!class_exists($itemtype)) {
                   continue;
                }
-               $item = new $itemtype();
+               $item      = new $itemtype();
                $tabs[$nb] = $item::getTypeName(2);
             }
             $nb++;
@@ -158,17 +160,18 @@ class PluginEnvironmentDisplay extends CommonGLPI
 
    /**
     * @param CommonGLPI $item
-    * @param int $tabnum
-    * @param int $withtemplate
+    * @param int        $tabnum
+    * @param int        $withtemplate
+    *
     * @return bool
     */
    static function displayTabContentForItem(CommonGLPI $item, $tabnum = 1, $withtemplate = 0) {
 
       $plugs = self::$plugins;
-      $tab = [];
-      $nb = 1;
+      $tab   = [];
+      $nb    = 1;
       foreach ($plugs as $plug) {
-         $plugin = new Plugin();
+         $plugin   = new Plugin();
          $function = "show$plug";
          if ($plugin->isActivated($plug)) {
             $tab[$nb] = $function;
@@ -194,7 +197,7 @@ class PluginEnvironmentDisplay extends CommonGLPI
          echo "<a href=\"" . $CFG_GLPI["root_doc"] . "/plugins/appliances/front/appliance.php\">";
          echo __('Appliances', 'environment');
          echo "</th></tr>";
-         $dbu          = new DbUtils();
+         $dbu   = new DbUtils();
          $query = "SELECT COUNT(`glpi_plugin_appliances_appliances`.`id`) AS total,
                               `glpi_plugin_appliances_appliancetypes`.`name` AS TYPE,
                               `glpi_plugin_appliances_appliances`.`entities_id` 
@@ -202,7 +205,7 @@ class PluginEnvironmentDisplay extends CommonGLPI
          $query .= " LEFT JOIN `glpi_plugin_appliances_appliancetypes` ON (`glpi_plugin_appliances_appliances`.`plugin_appliances_appliancetypes_id` = `glpi_plugin_appliances_appliancetypes`.`id`) ";
          $query .= " LEFT JOIN `glpi_entities` ON (`glpi_entities`.`id` = `glpi_plugin_appliances_appliances`.`entities_id`) ";
          $query .= "WHERE `glpi_plugin_appliances_appliances`.`is_deleted` = '0' "
-            . $dbu->getEntitiesRestrictRequest(" AND ", "glpi_plugin_appliances_appliances", '', '', true);
+                   . $dbu->getEntitiesRestrictRequest(" AND ", "glpi_plugin_appliances_appliances", '', '', true);
          $query .= "GROUP BY `glpi_plugin_appliances_appliances`.`entities_id`,`TYPE`
                ORDER BY `glpi_entities`.`completename`, `glpi_plugin_appliances_appliancetypes`.`name`";
 
@@ -245,16 +248,16 @@ class PluginEnvironmentDisplay extends CommonGLPI
          echo "<a href=\"" . $CFG_GLPI["root_doc"] . "/plugins/webapplications/front/webapplication.php\">";
          echo __('Web applications', 'environment');
          echo "</th></tr>";
-         $dbu          = new DbUtils();
-         $query = "SELECT COUNT(`glpi_plugin_webapplications_webapplications`.`id`) AS total,
+         $dbu    = new DbUtils();
+         $query  = "SELECT COUNT(`glpi_plugin_webapplications_webapplications`.`id`) AS total,
                         `glpi_plugin_webapplications_webapplicationtypes`.`name` AS TYPE,
                         `glpi_plugin_webapplications_webapplications`.`entities_id` 
                   FROM `glpi_plugin_webapplications_webapplications` ";
-         $query .= " LEFT JOIN `glpi_plugin_webapplications_webapplicationtypes` ON (`glpi_plugin_webapplications_webapplications`.`plugin_webapplications_webapplicationtypes_id` = `glpi_plugin_webapplications_webapplicationtypes`.`id`) ";
-         $query .= " LEFT JOIN `glpi_entities` ON (`glpi_entities`.`id`=`glpi_plugin_webapplications_webapplications`.`entities_id`) ";
-         $query .= "WHERE `glpi_plugin_webapplications_webapplications`.`is_deleted` = '0' "
-            . $dbu->getEntitiesRestrictRequest(" AND ", "glpi_plugin_webapplications_webapplications", '', '', true);
-         $query .= "GROUP BY `glpi_plugin_webapplications_webapplications`.`entities_id`,`TYPE`
+         $query  .= " LEFT JOIN `glpi_plugin_webapplications_webapplicationtypes` ON (`glpi_plugin_webapplications_webapplications`.`plugin_webapplications_webapplicationtypes_id` = `glpi_plugin_webapplications_webapplicationtypes`.`id`) ";
+         $query  .= " LEFT JOIN `glpi_entities` ON (`glpi_entities`.`id`=`glpi_plugin_webapplications_webapplications`.`entities_id`) ";
+         $query  .= "WHERE `glpi_plugin_webapplications_webapplications`.`is_deleted` = '0' "
+                    . $dbu->getEntitiesRestrictRequest(" AND ", "glpi_plugin_webapplications_webapplications", '', '', true);
+         $query  .= "GROUP BY `glpi_plugin_webapplications_webapplications`.`entities_id`,`TYPE`
                ORDER BY `glpi_entities`.`completename`, `glpi_plugin_webapplications_webapplicationtypes`.`name` ";
          $result = $DB->query($query);
          if ($DB->numrows($result)) {
@@ -300,7 +303,7 @@ class PluginEnvironmentDisplay extends CommonGLPI
 
          if (count($_SESSION["glpigroups"])) {
             $first_groups = true;
-            $groups = "";
+            $groups       = "";
             foreach ($_SESSION['glpigroups'] as $val) {
                if (!$first_groups) {
                   $groups .= ",";
@@ -331,9 +334,9 @@ class PluginEnvironmentDisplay extends CommonGLPI
                $query .= " $ASSIGN ";
             }
          }
-         $dbu          = new DbUtils();
+         $dbu   = new DbUtils();
          $query .= " `glpi_plugin_accounts_accounts`.`is_deleted` = '0' "
-            . $dbu->getEntitiesRestrictRequest(" AND ", "glpi_plugin_accounts_accounts", '', '', true);
+                   . $dbu->getEntitiesRestrictRequest(" AND ", "glpi_plugin_accounts_accounts", '', '', true);
          $query .= "GROUP BY `glpi_plugin_accounts_accounts`.`entities_id`,`TYPE`
                ORDER BY `glpi_entities`.`completename`, `glpi_plugin_accounts_accounttypes`.`name`";
 
@@ -403,7 +406,7 @@ class PluginEnvironmentDisplay extends CommonGLPI
          echo "<a href=\"" . $CFG_GLPI["root_doc"] . "/plugins/domains/front/domain.php\">";
          echo __('Domains', 'environment');
          echo "</th></tr>";
-         $dbu          = new DbUtils();
+         $dbu   = new DbUtils();
          $query = "SELECT COUNT(`glpi_plugin_domains_domains`.`id`) AS total,
                               `glpi_plugin_domains_domaintypes`.`name` AS TYPE,
                               `glpi_plugin_domains_domains`.`entities_id` 
@@ -411,7 +414,7 @@ class PluginEnvironmentDisplay extends CommonGLPI
          $query .= " LEFT JOIN `glpi_plugin_domains_domaintypes` ON (`glpi_plugin_domains_domains`.`plugin_domains_domaintypes_id` = `glpi_plugin_domains_domaintypes`.`id`) ";
          $query .= " LEFT JOIN `glpi_entities` ON (`glpi_entities`.`id` = `glpi_plugin_domains_domains`.`entities_id`) ";
          $query .= "WHERE `glpi_plugin_domains_domains`.`is_deleted` = '0' "
-            . $dbu->getEntitiesRestrictRequest(" AND ", "glpi_plugin_domains_domains", '', '', true);
+                   . $dbu->getEntitiesRestrictRequest(" AND ", "glpi_plugin_domains_domains", '', '', true);
          $query .= "GROUP BY `glpi_plugin_domains_domains`.`entities_id`,`TYPE`
                ORDER BY `glpi_entities`.`completename`, `glpi_plugin_domains_domaintypes`.`name` ";
 
@@ -454,7 +457,7 @@ class PluginEnvironmentDisplay extends CommonGLPI
          echo "<a href=\"" . $CFG_GLPI["root_doc"] . "/plugins/databases/front/database.php\">";
          echo __('Databases', 'environment');
          echo "</th></tr>";
-         $dbu          = new DbUtils();
+         $dbu   = new DbUtils();
          $query = "SELECT COUNT(`glpi_plugin_databases_databases`.`id`) AS total,
                               `glpi_plugin_databases_databasetypes`.`name` AS TYPE,
                               `glpi_plugin_databases_databases`.`entities_id` 
@@ -462,7 +465,7 @@ class PluginEnvironmentDisplay extends CommonGLPI
          $query .= " LEFT JOIN `glpi_plugin_databases_databasetypes` ON (`glpi_plugin_databases_databases`.`plugin_databases_databasetypes_id` = `glpi_plugin_databases_databasetypes`.`id`) ";
          $query .= " LEFT JOIN `glpi_entities` ON (`glpi_entities`.`id` = `glpi_plugin_databases_databases`.`entities_id`) ";
          $query .= "WHERE `glpi_plugin_databases_databases`.`is_deleted` = '0' "
-            . $dbu->getEntitiesRestrictRequest(" AND ", "glpi_plugin_databases_databases", '', '', true);
+                   . $dbu->getEntitiesRestrictRequest(" AND ", "glpi_plugin_databases_databases", '', '', true);
          $query .= "GROUP BY `glpi_plugin_databases_databases`.`entities_id`,`TYPE`
                ORDER BY `glpi_entities`.`completename`, `glpi_plugin_databases_databasetypes`.`name`";
 
@@ -497,7 +500,7 @@ class PluginEnvironmentDisplay extends CommonGLPI
 
    static function showbadges() {
       global $CFG_GLPI, $DB;
-      $dbu          = new DbUtils();
+      $dbu = new DbUtils();
       if (Session::haveRight("plugin_environment_badges", READ)) {
          echo "<table class='tab_cadrehov' width='750px'>";
          echo "<tr>";
@@ -513,7 +516,7 @@ class PluginEnvironmentDisplay extends CommonGLPI
          $query .= " LEFT JOIN `glpi_plugin_badges_badgetypes` ON (`glpi_plugin_badges_badges`.`plugin_badges_badgetypes_id` = `glpi_plugin_badges_badgetypes`.`id`) ";
          $query .= " LEFT JOIN `glpi_entities` ON (`glpi_entities`.`id` = `glpi_plugin_badges_badges`.`entities_id`) ";
          $query .= "WHERE `glpi_plugin_badges_badges`.`is_deleted` = '0' "
-            . $dbu->getEntitiesRestrictRequest(" AND ", "glpi_plugin_badges_badges", '', '', false);
+                   . $dbu->getEntitiesRestrictRequest(" AND ", "glpi_plugin_badges_badges", '', '', false);
          $query .= "GROUP BY `glpi_plugin_badges_badges`.`entities_id`,`TYPE`
                ORDER BY `glpi_entities`.`completename`, `glpi_plugin_badges_badgetypes`.`name` ";
 
