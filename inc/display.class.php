@@ -511,12 +511,13 @@ class PluginEnvironmentDisplay extends CommonGLPI {
 
          $query = "SELECT COUNT(`glpi_plugin_badges_badges`.`id`) AS total,
                            `glpi_plugin_badges_badgetypes`.`name` AS TYPE,
-                           `glpi_plugin_badges_badges`.`entities_id` 
+                           `glpi_plugin_badges_badges`.`entities_id` ,
+                           `glpi_plugin_badges_badges`.`is_recursive` 
                   FROM `glpi_plugin_badges_badges` ";
          $query .= " LEFT JOIN `glpi_plugin_badges_badgetypes` ON (`glpi_plugin_badges_badges`.`plugin_badges_badgetypes_id` = `glpi_plugin_badges_badgetypes`.`id`) ";
          $query .= " LEFT JOIN `glpi_entities` ON (`glpi_entities`.`id` = `glpi_plugin_badges_badges`.`entities_id`) ";
          $query .= "WHERE `glpi_plugin_badges_badges`.`is_deleted` = '0' "
-                   . $dbu->getEntitiesRestrictRequest(" AND ", "glpi_plugin_badges_badges", '', '', false);
+         . $dbu->getEntitiesRestrictRequest(" AND ", "glpi_plugin_badges_badges", '', '', true);
          $query .= "GROUP BY `glpi_plugin_badges_badges`.`entities_id`,`TYPE`
                ORDER BY `glpi_entities`.`completename`, `glpi_plugin_badges_badgetypes`.`name` ";
 
