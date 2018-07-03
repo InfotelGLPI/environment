@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: GLPI - Environment plugin 1.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-09 08:44+0200\n"
+"POT-Creation-Date: 2018-07-03 08:04+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -28,39 +28,39 @@ msgid_plural "Encryption keys"
 msgstr[0] ""
 msgstr[1] ""
 
-#: inc/display.class.php:195 inc/display.class.php:211
-#: inc/display.class.php:231 inc/profile.class.php:179
+#: inc/display.class.php:198 inc/display.class.php:214
+#: inc/display.class.php:234 inc/profile.class.php:179
 msgid "Appliances"
 msgstr ""
 
-#: inc/display.class.php:224 inc/display.class.php:274
-#: inc/display.class.php:363 inc/display.class.php:365
-#: inc/display.class.php:368 inc/display.class.php:433
-#: inc/display.class.php:484 inc/display.class.php:535
+#: inc/display.class.php:227 inc/display.class.php:277
+#: inc/display.class.php:366 inc/display.class.php:368
+#: inc/display.class.php:371 inc/display.class.php:436
+#: inc/display.class.php:487 inc/display.class.php:538
 msgid "Without type"
 msgstr ""
 
-#: inc/display.class.php:246 inc/display.class.php:261
-#: inc/display.class.php:281 inc/profile.class.php:183
+#: inc/display.class.php:249 inc/display.class.php:264
+#: inc/display.class.php:284 inc/profile.class.php:183
 msgid "Web applications"
 msgstr ""
 
-#: inc/display.class.php:296 inc/display.class.php:342
-#: inc/display.class.php:389 inc/profile.class.php:187
+#: inc/display.class.php:299 inc/display.class.php:345
+#: inc/display.class.php:392 inc/profile.class.php:187
 msgid "Accounts"
 msgstr ""
 
-#: inc/display.class.php:404 inc/display.class.php:420
-#: inc/display.class.php:440 inc/profile.class.php:191
+#: inc/display.class.php:407 inc/display.class.php:423
+#: inc/display.class.php:443 inc/profile.class.php:191
 msgid "Domains"
 msgstr ""
 
-#: inc/display.class.php:455 inc/display.class.php:471
-#: inc/display.class.php:491 inc/profile.class.php:195
+#: inc/display.class.php:458 inc/display.class.php:474
+#: inc/display.class.php:494 inc/profile.class.php:195
 msgid "Databases"
 msgstr ""
 
-#: inc/display.class.php:506 inc/display.class.php:522
-#: inc/display.class.php:542 inc/profile.class.php:199
+#: inc/display.class.php:509 inc/display.class.php:525
+#: inc/display.class.php:545 inc/profile.class.php:199
 msgid "Badges"
 msgstr ""

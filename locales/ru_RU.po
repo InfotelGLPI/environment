@@ -3,9 +3,6 @@
 # This file is distributed under the same license as the GLPI - Environment plugin package.
 # 
 # Translators:
-# Le Rohellec Benoit <blerohellec@hotmail.com>, 2015
-# Luis Ferrer <lferrer@fmv.cat>, 2017
-# Xavier CAILLAUD <thetsmr@gmail.com>, 2012
 msgid ""
 msgstr ""
 "Project-Id-Version: GLPI Project - environment plugin\n"
@@ -13,56 +10,58 @@ msgstr ""
 "POT-Creation-Date: 2018-07-03 08:04+0200\n"
 "PO-Revision-Date: 2018-07-03 06:05+0000\n"
 "Last-Translator: Amandine Manceau\n"
-"Language-Team: Spanish (Spain) (http://www.transifex.com/tsmr/GLPI_environment/language/es_ES/)\n"
+"Language-Team: Russian (Russia) (http://www.transifex.com/tsmr/GLPI_environment/language/ru_RU/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: es_ES\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: ru_RU\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
 
 #: setup.php:58 inc/display.class.php:49 inc/profile.class.php:175
 msgid "Environment"
-msgstr "Entorno"
+msgstr "Окружение"
 
 #: inc/display.class.php:86 inc/display.class.php:87
 msgid "Encryption key"
 msgid_plural "Encryption keys"
-msgstr[0] "Clave de cifrado"
-msgstr[1] "Claves de cifrado"
+msgstr[0] "Ключи шифрования"
+msgstr[1] "Ключи шифрования"
+msgstr[2] "Ключи шифрования"
+msgstr[3] "Ключи шифрования"
 
 #: inc/display.class.php:198 inc/display.class.php:214
 #: inc/display.class.php:234 inc/profile.class.php:179
 msgid "Appliances"
-msgstr "Aplicativos"
+msgstr "Устройства"
 
 #: inc/display.class.php:227 inc/display.class.php:277
 #: inc/display.class.php:366 inc/display.class.php:368
 #: inc/display.class.php:371 inc/display.class.php:436
 #: inc/display.class.php:487 inc/display.class.php:538
 msgid "Without type"
-msgstr "Sin tipo"
+msgstr "Без категоргии"
 
 #: inc/display.class.php:249 inc/display.class.php:264
 #: inc/display.class.php:284 inc/profile.class.php:183
 msgid "Web applications"
-msgstr "Aplicativos web"
+msgstr "Веб-приложения"
 
 #: inc/display.class.php:299 inc/display.class.php:345
 #: inc/display.class.php:392 inc/profile.class.php:187
 msgid "Accounts"
-msgstr "Cuentas"
+msgstr "Учетные записи"
 
 #: inc/display.class.php:407 inc/display.class.php:423
 #: inc/display.class.php:443 inc/profile.class.php:191
 msgid "Domains"
-msgstr "Dominios"
+msgstr "Домены"
 
 #: inc/display.class.php:458 inc/display.class.php:474
 #: inc/display.class.php:494 inc/profile.class.php:195
 msgid "Databases"
-msgstr "Bases de datos"
+msgstr "Базы данных"
 
 #: inc/display.class.php:509 inc/display.class.php:525
 #: inc/display.class.php:545 inc/profile.class.php:199
 msgid "Badges"
-msgstr "Tarjetas identificadoras"
+msgstr "Признаки"
