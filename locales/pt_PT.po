@@ -3,13 +3,14 @@
 # This file is distributed under the same license as the GLPI - Environment plugin package.
 # 
 # Translators:
+# Emperium EmperiuM <real.emperium@gmail.com>, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: GLPI Project - environment plugin\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-07-03 08:04+0200\n"
-"PO-Revision-Date: 2018-07-03 06:05+0000\n"
-"Last-Translator: Amandine Manceau\n"
+"PO-Revision-Date: 2018-10-03 16:28+0000\n"
+"Last-Translator: Emperium EmperiuM <real.emperium@gmail.com>\n"
 "Language-Team: Portuguese (Portugal) (http://www.transifex.com/tsmr/GLPI_environment/language/pt_PT/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,47 +20,47 @@ msgstr ""
 
 #: setup.php:58 inc/display.class.php:49 inc/profile.class.php:175
 msgid "Environment"
-msgstr ""
+msgstr "Ambiente"
 
 #: inc/display.class.php:86 inc/display.class.php:87
 msgid "Encryption key"
 msgid_plural "Encryption keys"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Chave de encriptação"
+msgstr[1] "Chaves de encriptação"
 
 #: inc/display.class.php:198 inc/display.class.php:214
 #: inc/display.class.php:234 inc/profile.class.php:179
 msgid "Appliances"
-msgstr ""
+msgstr "Appliances"
 
 #: inc/display.class.php:227 inc/display.class.php:277
 #: inc/display.class.php:366 inc/display.class.php:368
 #: inc/display.class.php:371 inc/display.class.php:436
 #: inc/display.class.php:487 inc/display.class.php:538
 msgid "Without type"
-msgstr ""
+msgstr "Sem tipo"
 
 #: inc/display.class.php:249 inc/display.class.php:264
 #: inc/display.class.php:284 inc/profile.class.php:183
 msgid "Web applications"
-msgstr ""
+msgstr "Aplicações web"
 
 #: inc/display.class.php:299 inc/display.class.php:345
 #: inc/display.class.php:392 inc/profile.class.php:187
 msgid "Accounts"
-msgstr ""
+msgstr "Contas"
 
 #: inc/display.class.php:407 inc/display.class.php:423
 #: inc/display.class.php:443 inc/profile.class.php:191
 msgid "Domains"
-msgstr ""
+msgstr "Domínios"
 
 #: inc/display.class.php:458 inc/display.class.php:474
 #: inc/display.class.php:494 inc/profile.class.php:195
 msgid "Databases"
-msgstr ""
+msgstr "Bases de dados"
 
 #: inc/display.class.php:509 inc/display.class.php:525
 #: inc/display.class.php:545 inc/profile.class.php:199
 msgid "Badges"
-msgstr ""
+msgstr "Emblemas"

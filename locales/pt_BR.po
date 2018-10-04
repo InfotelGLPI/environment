@@ -3,13 +3,14 @@
 # This file is distributed under the same license as the GLPI - Environment plugin package.
 # 
 # Translators:
+# Gustavo Plottier Pilotto <gplottier@gmail.com>, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: GLPI Project - environment plugin\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-07-03 08:04+0200\n"
-"PO-Revision-Date: 2018-07-03 06:05+0000\n"
-"Last-Translator: Amandine Manceau\n"
+"PO-Revision-Date: 2018-08-16 13:35+0000\n"
+"Last-Translator: Gustavo Plottier Pilotto <gplottier@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/tsmr/GLPI_environment/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -24,8 +25,8 @@ msgstr "Ambiente"
 #: inc/display.class.php:86 inc/display.class.php:87
 msgid "Encryption key"
 msgid_plural "Encryption keys"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Chave de encriptação"
+msgstr[1] "Chave de encriptação"
 
 #: inc/display.class.php:198 inc/display.class.php:214
 #: inc/display.class.php:234 inc/profile.class.php:179
