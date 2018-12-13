@@ -60,7 +60,12 @@ function plugin_version_environment() {
       'license'        => 'GPLv2+',
       'author'         => "<a href='http://infotel.com/services/expertise-technique/glpi/'>Infotel</a>",
       'homepage'       => 'https://github.com/InfotelGLPI/environment',
-      'minGlpiVersion' => '9.4',
+      'requirements'   => [
+         'glpi' => [
+            'min' => '9.4',
+            'dev' => false
+         ]
+      ]
    ];
 
 }
@@ -70,8 +75,11 @@ function plugin_version_environment() {
  * @return bool
  */
 function plugin_environment_check_prerequisites() {
-   if (version_compare(GLPI_VERSION, '9.4', 'lt') || version_compare(GLPI_VERSION, '9.5', 'ge')) {
-      echo __('This plugin requires GLPI >= 9.4');
+   if (version_compare(GLPI_VERSION, '9.4', 'lt')
+       || version_compare(GLPI_VERSION, '9.5', 'ge')) {
+      if (method_exists('Plugin', 'messageIncompatible')) {
+         echo Plugin::messageIncompatible('core', '9.4');
+      }
       return false;
    }
    return true;
