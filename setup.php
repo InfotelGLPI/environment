@@ -60,7 +60,7 @@ function plugin_version_environment() {
       'name'           => __('Environment', 'environment'),
       'version'        => PLUGIN_ENVIRONNEMENT_VERSION,
       'license'        => 'GPLv2+',
-      'author'         => "<a href='http://infotel.com/services/expertise-technique/glpi/'>Infotel</a>",
+      'author'         => "<a href='http://blogglpi.infotel.com'>Infotel</a>",
       'homepage'       => 'https://github.com/InfotelGLPI/environment',
       'requirements'   => [
          'glpi' => [
