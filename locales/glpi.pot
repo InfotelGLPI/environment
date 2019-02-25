@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: GLPI - Environment plugin 1.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-03 08:04+0200\n"
+"POT-Creation-Date: 2019-02-25 10:26+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: setup.php:58 inc/display.class.php:49 inc/profile.class.php:175
+#: setup.php:60 inc/display.class.php:49 inc/profile.class.php:175
 msgid "Environment"
 msgstr ""
 
@@ -36,7 +36,7 @@ msgstr ""
 #: inc/display.class.php:227 inc/display.class.php:277
 #: inc/display.class.php:366 inc/display.class.php:368
 #: inc/display.class.php:371 inc/display.class.php:436
-#: inc/display.class.php:487 inc/display.class.php:538
+#: inc/display.class.php:487 inc/display.class.php:539
 msgid "Without type"
 msgstr ""
 
@@ -60,7 +60,7 @@ msgstr ""
 msgid "Databases"
 msgstr ""
 
-#: inc/display.class.php:509 inc/display.class.php:525
-#: inc/display.class.php:545 inc/profile.class.php:199
+#: inc/display.class.php:509 inc/display.class.php:526
+#: inc/display.class.php:546 inc/profile.class.php:199
 msgid "Badges"
 msgstr ""
