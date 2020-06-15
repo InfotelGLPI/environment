@@ -69,10 +69,8 @@ class PluginEnvironmentProfile extends CommonDBTM {
 
          self::addDefaultProfileInfos($ID,
                                       ['plugin_environment'                 => 0,
-                                       'plugin_environment_appliances'      => 0,
                                        'plugin_environment_webapplications' => 0,
                                        'plugin_environment_accounts'        => 0,
-                                       'plugin_environment_domains'         => 0,
                                        'plugin_environment_databases'       => 0,
                                        'plugin_environment_badges'          => 0]);
          $prof->showForm($ID);
@@ -87,10 +85,8 @@ class PluginEnvironmentProfile extends CommonDBTM {
       //85
       self::addDefaultProfileInfos($ID,
                                    ['plugin_environment'                 => 1,
-                                    'plugin_environment_appliances'      => 1,
                                     'plugin_environment_webapplications' => 1,
                                     'plugin_environment_accounts'        => 1,
-                                    'plugin_environment_domains'         => 1,
                                     'plugin_environment_databases'       => 1,
                                     'plugin_environment_badges'          => 1], true);
    }
@@ -176,20 +172,12 @@ class PluginEnvironmentProfile extends CommonDBTM {
           'field'  => 'plugin_environment'
          ],
          ['rights' => [READ => __('Read')],
-          'label'  => __('Appliances', 'environment'),
-          'field'  => 'plugin_environment_appliances'
-         ],
-         ['rights' => [READ => __('Read')],
           'label'  => __('Web applications', 'environment'),
           'field'  => 'plugin_environment_webapplications'
          ],
          ['rights' => [READ => __('Read')],
           'label'  => __('Accounts', 'environment'),
           'field'  => 'plugin_environment_accounts'
-         ],
-         ['rights' => [READ => __('Read')],
-          'label'  => __('Domains', 'environment'),
-          'field'  => 'plugin_environment_domains'
          ],
          ['rights' => [READ => __('Read')],
           'label'  => __('Databases', 'environment'),
@@ -248,10 +236,8 @@ class PluginEnvironmentProfile extends CommonDBTM {
                             "`profiles_id`='$profiles_id'") as $profile_data) {
 
          $matching       = ['environment'     => 'plugin_environment',
-                            'appliances'      => 'plugin_environment_appliances',
                             'webapplications' => 'plugin_environment_webapplications',
                             'accounts'        => 'plugin_environment_accounts',
-                            'domains'         => 'plugin_environment_domains',
                             'databases'       => 'plugin_environment_databases',
                             'badges'          => 'plugin_environment_badges'];
          $current_rights = ProfileRight::getProfileRights($profiles_id, array_values($matching));
