@@ -1,24 +1,27 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Environment Development Team
 # This file is distributed under the same license as the GLPI - Environment plugin package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Xavier CAILLAUD <thetsmr@gmail.com>, 2012
+# Xavier CAILLAUD <thetsmr@gmail.com>, 2020
+# 
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: GLPI Project - environment plugin\n"
+"Project-Id-Version: GLPI - Environment plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-03 08:04+0200\n"
-"PO-Revision-Date: 2018-07-03 06:05+0000\n"
-"Last-Translator: Amandine Manceau\n"
-"Language-Team: Dutch (Netherlands) (http://www.transifex.com/tsmr/GLPI_environment/language/nl_NL/)\n"
+"POT-Creation-Date: 2020-11-02 17:44+0100\n"
+"PO-Revision-Date: 2020-11-02 16:02+0000\n"
+"Last-Translator: Xavier CAILLAUD <thetsmr@gmail.com>, 2020\n"
+"Language-Team: Dutch (Netherlands) (https://www.transifex.com/infotelGLPI/teams/12359/nl_NL/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: nl_NL\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: setup.php:58 inc/display.class.php:49 inc/profile.class.php:175
+#: setup.php:60 inc/display.class.php:49 inc/profile.class.php:169
 msgid "Environment"
 msgstr "Omgeving"
 
@@ -28,39 +31,14 @@ msgid_plural "Encryption keys"
 msgstr[0] ""
 msgstr[1] ""
 
-#: inc/display.class.php:198 inc/display.class.php:214
-#: inc/display.class.php:234 inc/profile.class.php:179
-msgid "Appliances"
-msgstr "Apparaten"
-
-#: inc/display.class.php:227 inc/display.class.php:277
-#: inc/display.class.php:366 inc/display.class.php:368
-#: inc/display.class.php:371 inc/display.class.php:436
-#: inc/display.class.php:487 inc/display.class.php:538
-msgid "Without type"
-msgstr ""
-
-#: inc/display.class.php:249 inc/display.class.php:264
-#: inc/display.class.php:284 inc/profile.class.php:183
-msgid "Web applications"
-msgstr ""
-
-#: inc/display.class.php:299 inc/display.class.php:345
-#: inc/display.class.php:392 inc/profile.class.php:187
+#: inc/profile.class.php:173
 msgid "Accounts"
 msgstr "Profielen"
 
-#: inc/display.class.php:407 inc/display.class.php:423
-#: inc/display.class.php:443 inc/profile.class.php:191
-msgid "Domains"
-msgstr "Domeinen"
-
-#: inc/display.class.php:458 inc/display.class.php:474
-#: inc/display.class.php:494 inc/profile.class.php:195
+#: inc/profile.class.php:177
 msgid "Databases"
 msgstr ""
 
-#: inc/display.class.php:509 inc/display.class.php:525
-#: inc/display.class.php:545 inc/profile.class.php:199
+#: inc/profile.class.php:181
 msgid "Badges"
 msgstr "Kaarten"
