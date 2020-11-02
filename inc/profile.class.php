@@ -69,7 +69,6 @@ class PluginEnvironmentProfile extends CommonDBTM {
 
          self::addDefaultProfileInfos($ID,
                                       ['plugin_environment'                 => 0,
-                                       'plugin_environment_webapplications' => 0,
                                        'plugin_environment_accounts'        => 0,
                                        'plugin_environment_databases'       => 0,
                                        'plugin_environment_badges'          => 0]);
@@ -85,7 +84,6 @@ class PluginEnvironmentProfile extends CommonDBTM {
       //85
       self::addDefaultProfileInfos($ID,
                                    ['plugin_environment'                 => 1,
-                                    'plugin_environment_webapplications' => 1,
                                     'plugin_environment_accounts'        => 1,
                                     'plugin_environment_databases'       => 1,
                                     'plugin_environment_badges'          => 1], true);
@@ -172,10 +170,6 @@ class PluginEnvironmentProfile extends CommonDBTM {
           'field'  => 'plugin_environment'
          ],
          ['rights' => [READ => __('Read')],
-          'label'  => __('Web applications', 'environment'),
-          'field'  => 'plugin_environment_webapplications'
-         ],
-         ['rights' => [READ => __('Read')],
           'label'  => __('Accounts', 'environment'),
           'field'  => 'plugin_environment_accounts'
          ],
@@ -236,7 +230,6 @@ class PluginEnvironmentProfile extends CommonDBTM {
                             "`profiles_id`='$profiles_id'") as $profile_data) {
 
          $matching       = ['environment'     => 'plugin_environment',
-                            'webapplications' => 'plugin_environment_webapplications',
                             'accounts'        => 'plugin_environment_accounts',
                             'databases'       => 'plugin_environment_databases',
                             'badges'          => 'plugin_environment_badges'];

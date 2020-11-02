@@ -37,7 +37,7 @@ if (!defined('GLPI_ROOT')) {
 class PluginEnvironmentDisplay extends CommonGLPI {
 
    static $rightname = "plugin_environment";
-   static $plugins   = ['webapplications', 'accounts', 'databases', 'badges'];
+   static $plugins   = ['accounts', 'databases', 'badges'];
 
    /**
     * @param int $nb
