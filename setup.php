@@ -27,7 +27,7 @@
  --------------------------------------------------------------------------
  */
 
-define('PLUGIN_ENVIRONNEMENT_VERSION', '2.4.0');
+define('PLUGIN_ENVIRONNEMENT_VERSION', '2.4.1');
 
 // Init the hooks of the plugins -Needed
 function plugin_init_environment() {

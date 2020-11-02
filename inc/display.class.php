@@ -191,4 +191,369 @@ class PluginEnvironmentDisplay extends CommonGLPI {
       }
       return true;
    }
+
+
+
+   static function showappliances() {
+      global $CFG_GLPI, $DB;
+
+      if (Session::haveRight("plugin_environment_appliances", READ)) {
+         echo "<table class='tab_cadrehov' width='750px'>";
+         echo "<tr>";
+         echo "<th class='center top' colspan='2'>";
+         echo "<a href=\"" . $CFG_GLPI["root_doc"] . "/plugins/appliances/front/appliance.php\">";
+         echo __('Appliances', 'environment');
+         echo "</th></tr>";
+         $dbu   = new DbUtils();
+         $query = "SELECT COUNT(`glpi_plugin_appliances_appliances`.`id`) AS total,
+                              `glpi_plugin_appliances_appliancetypes`.`name` AS TYPE,
+                              `glpi_plugin_appliances_appliances`.`entities_id` 
+                  FROM `glpi_plugin_appliances_appliances` ";
+         $query .= " LEFT JOIN `glpi_plugin_appliances_appliancetypes` ON (`glpi_plugin_appliances_appliances`.`plugin_appliances_appliancetypes_id` = `glpi_plugin_appliances_appliancetypes`.`id`) ";
+         $query .= " LEFT JOIN `glpi_entities` ON (`glpi_entities`.`id` = `glpi_plugin_appliances_appliances`.`entities_id`) ";
+         $query .= "WHERE `glpi_plugin_appliances_appliances`.`is_deleted` = '0' "
+            . $dbu->getEntitiesRestrictRequest(" AND ", "glpi_plugin_appliances_appliances", '', '', true);
+         $query .= "GROUP BY `glpi_plugin_appliances_appliances`.`entities_id`,`TYPE`
+               ORDER BY `glpi_entities`.`completename`, `glpi_plugin_appliances_appliancetypes`.`name`";
+
+         $result = $DB->query($query);
+         if ($DB->numrows($result)) {
+            echo "<tr><th colspan='2'>" . __('Appliances', 'environment') . " : </th></tr>";
+            while ($data = $DB->fetchArray($result)) {
+               echo "<tr class='tab_bg_1'>";
+               $link = "";
+               if (Session::isMultiEntitiesMode()) {
+                  echo "<td class='left top'>" . Dropdown::getDropdownName("glpi_entities", $data["entities_id"]) . "</td>";
+                  if ($data["entities_id"] == 0) {
+                     $link = "&criteria[1][link]=AND&criteria[1][searchtype]=contains&criteria[1][value]=-1&criteria[1][field]=81";
+                  } else {
+                     $link = "&criteria[1][link]=AND&criteria[1][searchtype]=equals&criteria[1][value]=" . $data["entities_id"] . "&criteria[1][field]=80";
+                  }
+               }
+               if (empty($data["TYPE"])) {
+                  echo "<td><a href='" . $CFG_GLPI["root_doc"] . "/plugins/appliances/front/appliance.php?glpisearchcount=2&criteria[0][searchtype]=contains&criteria[0][value]=NULL&criteria[0][field]=2$link&is_deleted=0&itemtype=PluginAppliancesAppliance&start=0'>" . $data["total"] . " " . __('Without type', 'environment') . "</a></td>";
+               } else {
+                  echo "<td><a href='" . $CFG_GLPI["root_doc"] . "/plugins/appliances/front/appliance.php?glpisearchcount=2&criteria[0][searchtype]=contains&criteria[0][value]=" . rawurlencode($data["TYPE"]) . "&criteria[0][field]=2$link&is_deleted=0&itemtype=PluginAppliancesAppliance&start=0'>" . $data["total"] . " " . $data["TYPE"] . "</a></td>";
+               }
+               echo "</tr>";
+            }
+         } else {
+            echo "<tr><th colspan='2'>" . __('Appliances', 'environment') . " : 0</th></tr>";
+         }
+
+         echo "</table><br>";
+      }
+   }
+
+   static function showwebapplications() {
+      global $CFG_GLPI, $DB;
+
+      if (Session::haveRight("plugin_environment_webapplications", READ)) {
+         echo "<table class='tab_cadrehov' width='750px'>";
+         echo "<tr>";
+         echo "<th class='center top' colspan='2'>";
+         echo "<a href=\"" . $CFG_GLPI["root_doc"] . "/plugins/webapplications/front/webapplication.php\">";
+         echo __('Web applications', 'environment');
+         echo "</th></tr>";
+         $dbu    = new DbUtils();
+         $query  = "SELECT COUNT(`glpi_plugin_webapplications_webapplications`.`id`) AS total,
+                        `glpi_plugin_webapplications_webapplicationtypes`.`name` AS TYPE,
+                        `glpi_plugin_webapplications_webapplications`.`entities_id` 
+                  FROM `glpi_plugin_webapplications_webapplications` ";
+         $query  .= " LEFT JOIN `glpi_plugin_webapplications_webapplicationtypes` ON (`glpi_plugin_webapplications_webapplications`.`plugin_webapplications_webapplicationtypes_id` = `glpi_plugin_webapplications_webapplicationtypes`.`id`) ";
+         $query  .= " LEFT JOIN `glpi_entities` ON (`glpi_entities`.`id`=`glpi_plugin_webapplications_webapplications`.`entities_id`) ";
+         $query  .= "WHERE `glpi_plugin_webapplications_webapplications`.`is_deleted` = '0' "
+            . $dbu->getEntitiesRestrictRequest(" AND ", "glpi_plugin_webapplications_webapplications", '', '', true);
+         $query  .= "GROUP BY `glpi_plugin_webapplications_webapplications`.`entities_id`,`TYPE`
+               ORDER BY `glpi_entities`.`completename`, `glpi_plugin_webapplications_webapplicationtypes`.`name` ";
+         $result = $DB->query($query);
+         if ($DB->numrows($result)) {
+            echo "<tr><th colspan='2'>" . __('Web applications', 'environment') . " : </th></tr>";
+            while ($data = $DB->fetchArray($result)) {
+               echo "<tr class='tab_bg_1'>";
+               $link = "";
+               if (Session::isMultiEntitiesMode()) {
+                  echo "<td class='left top'>" . Dropdown::getDropdownName("glpi_entities", $data["entities_id"]) . "</td>";
+                  if ($data["entities_id"] == 0) {
+                     $link = "&criteria[1][link]=AND&criteria[1][searchtype]=contains&criteria[1][value]=-1&criteria[1][field]=81";
+                  } else {
+                     $link = "&criteria[1][link]=AND&criteria[1][searchtype]=equals&criteria[1][value]=" . $data["entities_id"] . "&criteria[1][field]=80";
+                  }
+               }
+               if (empty($data["TYPE"])) {
+                  echo "<td><a href='" . $CFG_GLPI["root_doc"] . "/plugins/webapplications/front/webapplication.php?glpisearchcount=2&criteria[0][searchtype]=contains&criteria[0][value]=NULL&criteria[0][field]=2$link&is_deleted=0&itemtype=PluginWebapplicationsWebapplication&start=0'>" . $data["total"] . " " . __('Without type', 'environment') . "</a></td>";
+               } else {
+                  echo "<td><a href='" . $CFG_GLPI["root_doc"] . "/plugins/webapplications/front/webapplication.php?glpisearchcount=2&criteria[0][searchtype]=contains&criteria[0][value]=" . rawurlencode($data["TYPE"]) . "&criteria[0][field]=2$link&is_deleted=0&itemtype=PluginWebapplicationsWebapplication&start=0'>" . $data["total"] . " " . $data["TYPE"] . "</a></td>";
+               }
+               echo "</tr>";
+            }
+         } else {
+            echo "<tr><th colspan='2'>" . __('Web applications', 'environment') . " : 0</th></tr>";
+         }
+
+         echo "</table><br>";
+      }
+   }
+
+   static function showaccounts() {
+      global $CFG_GLPI, $DB;
+
+      if (Session::haveRight("plugin_environment_accounts", READ)) {
+         echo "<table class='tab_cadrehov' width='750px'>";
+         echo "<tr>";
+         echo "<th class='center top' colspan='2'>";
+         echo "<a href=\"" . $CFG_GLPI["root_doc"] . "/plugins/accounts/front/account.php\">";
+         echo __('Accounts', 'environment');
+         echo "</th></tr>";
+
+         $who = Session::getLoginUserID();
+
+         if (count($_SESSION["glpigroups"])) {
+            $first_groups = true;
+            $groups       = "";
+            foreach ($_SESSION['glpigroups'] as $val) {
+               if (!$first_groups) {
+                  $groups .= ",";
+               } else {
+                  $first_groups = false;
+               }
+               $groups .= $val;
+            }
+            $ASSIGN = " (`glpi_plugin_accounts_accounts`.`groups_id` IN (SELECT DISTINCT `groups_id` 
+                                                                        FROM `glpi_groups_users` 
+                                                                        WHERE `groups_id` IN ($groups)) OR";
+            $ASSIGN .= " `glpi_plugin_accounts_accounts`.`users_id` = '$who') AND  ";
+         } else { // Only personal ones
+            $ASSIGN = " `glpi_plugin_accounts_accounts`.`users_id` = '$who' AND  ";
+         }
+
+         $query = "SELECT COUNT(`glpi_plugin_accounts_accounts`.`id`) AS total,
+                              `glpi_plugin_accounts_accounttypes`.`name` AS TYPE, 
+                              `glpi_plugin_accounts_accounts`.`entities_id` 
+                  FROM `glpi_plugin_accounts_accounts` ";
+         $query .= " LEFT JOIN `glpi_plugin_accounts_accounttypes` ON (`glpi_plugin_accounts_accounts`.`plugin_accounts_accounttypes_id` = `glpi_plugin_accounts_accounttypes`.`id`) ";
+         $query .= " LEFT JOIN `glpi_entities` ON (`glpi_entities`.`id` = `glpi_plugin_accounts_accounts`.`entities_id`) ";
+         $query .= "WHERE ";
+         if (!Session::haveRight("plugin_accounts_see_all_users", 1)) {
+            if (!Session::haveRight("plugin_accounts_my_groups", 1)) {
+               $query .= " `glpi_plugin_accounts_accounts`.`users_id` = " . $who . " AND  ";
+            } else {
+               $query .= " $ASSIGN ";
+            }
+         }
+         $dbu   = new DbUtils();
+         $query .= " `glpi_plugin_accounts_accounts`.`is_deleted` = '0' "
+            . $dbu->getEntitiesRestrictRequest(" AND ", "glpi_plugin_accounts_accounts", '', '', true);
+         $query .= "GROUP BY `glpi_plugin_accounts_accounts`.`entities_id`,`TYPE`
+               ORDER BY `glpi_entities`.`completename`, `glpi_plugin_accounts_accounttypes`.`name`";
+
+         $result = $DB->query($query);
+         if ($DB->numrows($result)) {
+            echo "<tr><th colspan='2'>" . __('Accounts', 'environment') . " : </th></tr>";
+            while ($data = $DB->fetchArray($result)) {
+               echo "<tr class='tab_bg_1'>";
+               $link = "";
+               if (Session::isMultiEntitiesMode()) {
+                  echo "<td class='left top'>" . Dropdown::getDropdownName("glpi_entities", $data["entities_id"]) . "</td>";
+                  if ($data["entities_id"] == 0) {
+                     $link = "&criteria[1][link]=AND&criteria[1][searchtype]=contains&criteria[1][value]=-1&criteria[1][field]=81";
+                  } else {
+                     $link = "&criteria[1][link]=AND&criteria[1][searchtype]=equals&criteria[1][value]=" . $data["entities_id"] . "&criteria[1][field]=80";
+                  }
+               }
+
+               if (empty($data["TYPE"])) {
+                  if (!Session::haveRight("plugin_accounts_see_all_users", 1)) {
+                     if (Session::haveRight("plugin_accounts_my_groups", 1)) {
+                        if ($data["entities_id"] == 0) {
+                           $linkgroup = "&criteria[1][link]=AND&criteria[1][field]=81&criteria[1][searchtype]=equals&criteria[1][value]=-1";
+                        } else {
+                           $linkgroup = "&criteria[1][link]=AND&criteria[1][field]=80&criteria[1][searchtype]=equals&criteria[1][value]=" . $data["entities_id"];
+                        }
+                        echo "<td><a href='" . $CFG_GLPI["root_doc"] . "/plugins/accounts/front/account.php?criteria[0][value]=NULL&criteria[0][field]=2&criteria[0][searchtype]=contains$linkgroup&criteria[2][link]=AND&criteria[2][field]=12&criteria[2][searchtype]=equals&criteria[2][value]=mygroups&is_deleted=0&itemtype=PluginAcountsAccount&start=0'>" . $data["total"] . " " . __('Without type', 'environment') . "</a></td>";
+                     } else {
+                        echo "<td><a href='" . $CFG_GLPI["root_doc"] . "/plugins/accounts/front/account.php?criteria[0][searchtype]=contains&criteria[0][value]=NULL&criteria[0][field]=2$link&is_deleted=0&itemtype=PluginAcountsAccount&start=0'>" . $data["total"] . " " . __('Without type', 'environment') . "</a></td>";
+                     }
+                  } else {
+                     echo "<td><a href='" . $CFG_GLPI["root_doc"] . "/plugins/accounts/front/account.php?criteria[0][searchtype]=contains&criteria[0][value]=NULL&criteria[0][field]=2$link&is_deleted=0&itemtype=PluginAcountsAccount&start=0'>" . $data["total"] . " " . __('Without type', 'environment') . "</a></td>";
+                  }
+               } else {
+
+                  if (!Session::haveRight("plugin_accounts_see_all_users", 1)) {
+                     if (Session::haveRight("plugin_accounts_my_groups", 1)) {
+                        if ($data["entities_id"] == 0) {
+                           $linkgroup = "&criteria[1][link]=AND&criteria[1][field]=81&criteria[1][searchtype]=equals&criteria[1][value]=-1";//"mygroups
+                        } else {
+                           $linkgroup = "&criteria[1][link]=AND&criteria[1][field]=80&criteria[1][searchtype]=equals&criteria[1][value]=" . $data["entities_id"];
+                        }
+                        echo "<td><a href='" . $CFG_GLPI["root_doc"] . "/plugins/accounts/front/account.php?criteria[0][value]=" . rawurlencode($data["TYPE"]) . "&criteria[0][field]=2&criteria[0][searchtype]=contains$linkgroup&criteria[2][link]=AND&criteria[2][field]=12&criteria[2][searchtype]=equals&criteria[2][value]=mygroups&is_deleted=0&itemtype=PluginAcountsAccount&start=0'>" . $data["total"] . " " . $data["TYPE"] . "</a></td>";
+                     } else {
+                        echo "<td><a href='" . $CFG_GLPI["root_doc"] . "/plugins/accounts/front/account.php?criteria[0][searchtype]=contains&criteria[0][value]=" . rawurlencode($data["TYPE"]) . "&criteria[0][field]=2$link&is_deleted=0&itemtype=PluginAcountsAccount&start=0'>" . $data["total"] . " " . $data["TYPE"] . "</a></td>";
+                     }
+                  } else {
+                     echo "<td><a href='" . $CFG_GLPI["root_doc"] . "/plugins/accounts/front/account.php?criteria[0][searchtype]=contains&criteria[0][value]=" . rawurlencode($data["TYPE"]) . "&criteria[0][field]=2$link&is_deleted=0&itemtype=PluginAcountsAccount&start=0'>" . $data["total"] . " " . $data["TYPE"] . "</a></td>";
+                  }
+               }
+            }
+         } else {
+            echo "<tr><th colspan='2'>" . __('Accounts', 'environment') . " : 0</th></tr>";
+         }
+
+         echo "</table><br>";
+      }
+   }
+
+   static function showdomains() {
+      global $CFG_GLPI, $DB;
+
+      if (Session::haveRight("plugin_environment_domains", READ)) {
+         echo "<table class='tab_cadrehov' width='750px'>";
+         echo "<tr>";
+         echo "<th class='center top' colspan='2'>";
+         echo "<a href=\"" . $CFG_GLPI["root_doc"] . "/plugins/domains/front/domain.php\">";
+         echo __('Domains', 'environment');
+         echo "</th></tr>";
+         $dbu   = new DbUtils();
+         $query = "SELECT COUNT(`glpi_plugin_domains_domains`.`id`) AS total,
+                              `glpi_plugin_domains_domaintypes`.`name` AS TYPE,
+                              `glpi_plugin_domains_domains`.`entities_id` 
+                  FROM `glpi_plugin_domains_domains` ";
+         $query .= " LEFT JOIN `glpi_plugin_domains_domaintypes` ON (`glpi_plugin_domains_domains`.`plugin_domains_domaintypes_id` = `glpi_plugin_domains_domaintypes`.`id`) ";
+         $query .= " LEFT JOIN `glpi_entities` ON (`glpi_entities`.`id` = `glpi_plugin_domains_domains`.`entities_id`) ";
+         $query .= "WHERE `glpi_plugin_domains_domains`.`is_deleted` = '0' "
+            . $dbu->getEntitiesRestrictRequest(" AND ", "glpi_plugin_domains_domains", '', '', true);
+         $query .= "GROUP BY `glpi_plugin_domains_domains`.`entities_id`,`TYPE`
+               ORDER BY `glpi_entities`.`completename`, `glpi_plugin_domains_domaintypes`.`name` ";
+
+         $result = $DB->query($query);
+         if ($DB->numrows($result)) {
+            echo "<tr><th colspan='2'>" . __('Domains', 'environment') . " : </th></tr>";
+            while ($data = $DB->fetchArray($result)) {
+               echo "<tr class='tab_bg_1'>";
+               $link = "";
+               if (Session::isMultiEntitiesMode()) {
+                  echo "<td class='left top'>" . Dropdown::getDropdownName("glpi_entities", $data["entities_id"]) . "</td>";
+                  if ($data["entities_id"] == 0) {
+                     $link = "&criteria[1][link]=AND&criteria[1][searchtype]=contains&criteria[1][value]=-1&criteria[1][field]=81";
+                  } else {
+                     $link = "&criteria[1][link]=AND&criteria[1][searchtype]=equals&criteria[1][value]=" . $data["entities_id"] . "&criteria[1][field]=80";
+                  }
+               }
+               if (empty($data["TYPE"])) {
+                  echo "<td><a href='" . $CFG_GLPI["root_doc"] . "/plugins/domains/front/domain.php?glpisearchcount=2&criteria[0][searchtype]=contains&criteria[0][value]=NULL&criteria[0][field]=2$link&is_deleted=0&itemtype=PluginDomainsDomain&start=0'>" . $data["total"] . " " . __('Without type', 'environment') . "</a></td>";
+               } else {
+                  echo "<td><a href='" . $CFG_GLPI["root_doc"] . "/plugins/domains/front/domain.php?glpisearchcount=2&criteria[0][searchtype]=contains&criteria[0][value]=" . rawurlencode($data["TYPE"]) . "&criteria[0][field]=2$link&is_deleted=0&itemtype=PluginDomainsDomain&start=0'>" . $data["total"] . " " . $data["TYPE"] . "</a></td>";
+               }
+               echo "</tr>";
+            }
+         } else {
+            echo "<tr><th colspan='2'>" . __('Domains', 'environment') . " : 0</th></tr>";
+         }
+
+         echo "</table><br>";
+      }
+   }
+
+   static function showdatabases() {
+      global $CFG_GLPI, $DB;
+
+      if (Session::haveRight("plugin_environment_databases", READ)) {
+         echo "<table class='tab_cadrehov' width='750px'>";
+         echo "<tr>";
+         echo "<th class='center top' colspan='2'>";
+         echo "<a href=\"" . $CFG_GLPI["root_doc"] . "/plugins/databases/front/database.php\">";
+         echo __('Databases', 'environment');
+         echo "</th></tr>";
+         $dbu   = new DbUtils();
+         $query = "SELECT COUNT(`glpi_plugin_databases_databases`.`id`) AS total,
+                              `glpi_plugin_databases_databasetypes`.`name` AS TYPE,
+                              `glpi_plugin_databases_databases`.`entities_id` 
+                  FROM `glpi_plugin_databases_databases` ";
+         $query .= " LEFT JOIN `glpi_plugin_databases_databasetypes` ON (`glpi_plugin_databases_databases`.`plugin_databases_databasetypes_id` = `glpi_plugin_databases_databasetypes`.`id`) ";
+         $query .= " LEFT JOIN `glpi_entities` ON (`glpi_entities`.`id` = `glpi_plugin_databases_databases`.`entities_id`) ";
+         $query .= "WHERE `glpi_plugin_databases_databases`.`is_deleted` = '0' "
+            . $dbu->getEntitiesRestrictRequest(" AND ", "glpi_plugin_databases_databases", '', '', true);
+         $query .= "GROUP BY `glpi_plugin_databases_databases`.`entities_id`,`TYPE`
+               ORDER BY `glpi_entities`.`completename`, `glpi_plugin_databases_databasetypes`.`name`";
+
+         $result = $DB->query($query);
+         if ($DB->numrows($result)) {
+            echo "<tr><th colspan='2'>" . __('Databases', 'environment') . " : </th></tr>";
+            while ($data = $DB->fetchArray($result)) {
+               echo "<tr class='tab_bg_1'>";
+               $link = "";
+               if (Session::isMultiEntitiesMode()) {
+                  echo "<td class='left top'>" . Dropdown::getDropdownName("glpi_entities", $data["entities_id"]) . "</td>";
+                  if ($data["entities_id"] == 0) {
+                     $link = "&criteria[1][link]=AND&criteria[1][searchtype]=contains&criteria[1][value]=-1&criteria[1][field]=81";
+                  } else {
+                     $link = "&criteria[1][link]=AND&criteria[1][searchtype]=equals&criteria[1][value]=" . $data["entities_id"] . "&criteria[1][field]=80";
+                  }
+               }
+               if (empty($data["TYPE"])) {
+                  echo "<td><a href='" . $CFG_GLPI["root_doc"] . "/plugins/databases/front/database.php?glpisearchcount=2&criteria[0][searchtype]=contains&criteria[0][value]=NULL&criteria[0][field]=10$link&is_deleted=0&itemtype=PluginDatabasesDatabase&start=0'>" . $data["total"] . " " . __('Without type', 'environment') . "</a></td>";
+               } else {
+                  echo "<td><a href='" . $CFG_GLPI["root_doc"] . "/plugins/databases/front/database.php?glpisearchcount=2&criteria[0][searchtype]=contains&criteria[0][value]=" . rawurlencode($data["TYPE"]) . "&criteria[0][field]=10$link&is_deleted=0&itemtype=PluginDatabasesDatabase&start=0'>" . $data["total"] . " " . $data["TYPE"] . "</a></td>";
+               }
+               echo "</tr>";
+            }
+         } else {
+            echo "<tr><th colspan='2'>" . __('Databases', 'environment') . " : 0</th></tr>";
+         }
+
+         echo "</table><br>";
+      }
+   }
+
+   static function showbadges() {
+      global $CFG_GLPI, $DB;
+      $dbu = new DbUtils();
+      if (Session::haveRight("plugin_environment_badges", READ)) {
+         echo "<table class='tab_cadrehov' width='750px'>";
+         echo "<tr>";
+         echo "<th class='center top' colspan='2'>";
+         echo "<a href=\"" . $CFG_GLPI["root_doc"] . "/plugins/badges/front/badge.php\">";
+         echo __('Badges', 'environment');
+         echo "</th></tr>";
+
+         $query = "SELECT COUNT(`glpi_plugin_badges_badges`.`id`) AS total,
+                           `glpi_plugin_badges_badgetypes`.`name` AS TYPE,
+                           `glpi_plugin_badges_badges`.`entities_id` ,
+                           `glpi_plugin_badges_badges`.`is_recursive` 
+                  FROM `glpi_plugin_badges_badges` ";
+         $query .= " LEFT JOIN `glpi_plugin_badges_badgetypes` ON (`glpi_plugin_badges_badges`.`plugin_badges_badgetypes_id` = `glpi_plugin_badges_badgetypes`.`id`) ";
+         $query .= " LEFT JOIN `glpi_entities` ON (`glpi_entities`.`id` = `glpi_plugin_badges_badges`.`entities_id`) ";
+         $query .= "WHERE `glpi_plugin_badges_badges`.`is_deleted` = '0' "
+            . $dbu->getEntitiesRestrictRequest(" AND ", "glpi_plugin_badges_badges", '', '', true);
+         $query .= "GROUP BY `glpi_plugin_badges_badges`.`entities_id`,`TYPE`
+               ORDER BY `glpi_entities`.`completename`, `glpi_plugin_badges_badgetypes`.`name` ";
+
+         $result = $DB->query($query);
+         if ($DB->numrows($result)) {
+            echo "<tr><th colspan='2'>" . __('Badges', 'environment') . " : </th></tr>";
+            while ($data = $DB->fetchArray($result)) {
+               echo "<tr class='tab_bg_1'>";
+               $link = "";
+               if (Session::isMultiEntitiesMode()) {
+                  echo "<td class='left top'>" . Dropdown::getDropdownName("glpi_entities", $data["entities_id"]) . "</td>";
+                  if ($data["entities_id"] == 0) {
+                     $link = "&criteria[1][link]=AND&criteria[1][searchtype]=contains&criteria[1][value]=-1&criteria[1][field]=81";
+                  } else {
+                     $link = "&criteria[1][link]=AND&criteria[1][searchtype]=equals&criteria[1][value]=" . $data["entities_id"] . "&criteria[1][field]=80";
+                  }
+               }
+               if (empty($data["TYPE"])) {
+                  echo "<td><a href='" . $CFG_GLPI["root_doc"] . "/plugins/badges/front/badge.php?glpisearchcount=2&criteria[0][searchtype]=contains&criteria[0][value]=NULL&criteria[0][field]=2$link&is_deleted=0&itemtype=PluginBadgesBadge&start=0'>" . $data["total"] . " " . __('Without type', 'environment') . "</a></td>";
+               } else {
+                  echo "<td><a href='" . $CFG_GLPI["root_doc"] . "/plugins/badges/front/badge.php?glpisearchcount=2&criteria[0][searchtype]=contains&criteria[0][value]=" . rawurlencode($data["TYPE"]) . "&criteria[0][field]=2$link&is_deleted=0&itemtype=PluginBadgesBadge&start=0'>" . $data["total"] . " " . $data["TYPE"] . "</a></td>";
+               }
+               echo "</tr>";
+            }
+         } else {
+            echo "<tr><th colspan='2'>" . __('Badges', 'environment') . " : 0</th></tr>";
+         }
+
+         echo "</table><br>";
+      }
+   }
 }
