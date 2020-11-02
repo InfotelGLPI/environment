@@ -9,10 +9,10 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: GLPI - Environment plugin 1.7.0\n"
+"Project-Id-Version: GLPI - Environment plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-25 10:26+0100\n"
-"PO-Revision-Date: 2020-11-02 12:54+0000\n"
+"POT-Creation-Date: 2020-11-02 17:44+0100\n"
+"PO-Revision-Date: 2020-11-02 16:02+0000\n"
 "Last-Translator: Xavier CAILLAUD <thetsmr@gmail.com>, 2020\n"
 "Language-Team: Polish (Poland) (https://www.transifex.com/infotelGLPI/teams/12359/pl_PL/)\n"
 "MIME-Version: 1.0\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Language: pl_PL\n"
 "Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
 
-#: setup.php:60 inc/display.class.php:49 inc/profile.class.php:175
+#: setup.php:60 inc/display.class.php:49 inc/profile.class.php:169
 msgid "Environment"
 msgstr "Środowisko"
 
@@ -33,39 +33,14 @@ msgstr[1] "Klucze szyfrujące"
 msgstr[2] "Klucze szyfrujące"
 msgstr[3] "Klucze szyfrujące"
 
-#: inc/display.class.php:198 inc/display.class.php:214
-#: inc/display.class.php:234 inc/profile.class.php:179
-msgid "Appliances"
-msgstr "Urządzenia"
-
-#: inc/display.class.php:227 inc/display.class.php:277
-#: inc/display.class.php:366 inc/display.class.php:368
-#: inc/display.class.php:371 inc/display.class.php:436
-#: inc/display.class.php:487 inc/display.class.php:539
-msgid "Without type"
-msgstr "Bez typu"
-
-#: inc/display.class.php:249 inc/display.class.php:264
-#: inc/display.class.php:284 inc/profile.class.php:183
-msgid "Web applications"
-msgstr "Aplikacje webowe"
-
-#: inc/display.class.php:299 inc/display.class.php:345
-#: inc/display.class.php:392 inc/profile.class.php:187
+#: inc/profile.class.php:173
 msgid "Accounts"
 msgstr "Konta"
 
-#: inc/display.class.php:407 inc/display.class.php:423
-#: inc/display.class.php:443 inc/profile.class.php:191
-msgid "Domains"
-msgstr "Domeny"
-
-#: inc/display.class.php:458 inc/display.class.php:474
-#: inc/display.class.php:494 inc/profile.class.php:195
+#: inc/profile.class.php:177
 msgid "Databases"
 msgstr "Bazy danych"
 
-#: inc/display.class.php:509 inc/display.class.php:526
-#: inc/display.class.php:546 inc/profile.class.php:199
+#: inc/profile.class.php:181
 msgid "Badges"
 msgstr "Plakietka"
