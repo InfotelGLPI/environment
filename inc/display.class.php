@@ -37,7 +37,7 @@ if (!defined('GLPI_ROOT')) {
 class PluginEnvironmentDisplay extends CommonGLPI {
 
    static $rightname = "plugin_environment";
-   static $plugins   = ['accounts', 'databases', 'badges'];
+   static $plugins   = ['accounts', 'databases', 'badges', 'webapplications'];
 
    /**
     * @param int $nb
@@ -192,83 +192,30 @@ class PluginEnvironmentDisplay extends CommonGLPI {
       return true;
    }
 
-
-
-   static function showappliances() {
-      global $CFG_GLPI, $DB;
-
-      if (Session::haveRight("plugin_environment_appliances", READ)) {
-         echo "<table class='tab_cadrehov' width='750px'>";
-         echo "<tr>";
-         echo "<th class='center top' colspan='2'>";
-         echo "<a href=\"" . $CFG_GLPI["root_doc"] . "/plugins/appliances/front/appliance.php\">";
-         echo __('Appliances', 'environment');
-         echo "</th></tr>";
-         $dbu   = new DbUtils();
-         $query = "SELECT COUNT(`glpi_plugin_appliances_appliances`.`id`) AS total,
-                              `glpi_plugin_appliances_appliancetypes`.`name` AS TYPE,
-                              `glpi_plugin_appliances_appliances`.`entities_id` 
-                  FROM `glpi_plugin_appliances_appliances` ";
-         $query .= " LEFT JOIN `glpi_plugin_appliances_appliancetypes` ON (`glpi_plugin_appliances_appliances`.`plugin_appliances_appliancetypes_id` = `glpi_plugin_appliances_appliancetypes`.`id`) ";
-         $query .= " LEFT JOIN `glpi_entities` ON (`glpi_entities`.`id` = `glpi_plugin_appliances_appliances`.`entities_id`) ";
-         $query .= "WHERE `glpi_plugin_appliances_appliances`.`is_deleted` = '0' "
-            . $dbu->getEntitiesRestrictRequest(" AND ", "glpi_plugin_appliances_appliances", '', '', true);
-         $query .= "GROUP BY `glpi_plugin_appliances_appliances`.`entities_id`,`TYPE`
-               ORDER BY `glpi_entities`.`completename`, `glpi_plugin_appliances_appliancetypes`.`name`";
-
-         $result = $DB->query($query);
-         if ($DB->numrows($result)) {
-            echo "<tr><th colspan='2'>" . __('Appliances', 'environment') . " : </th></tr>";
-            while ($data = $DB->fetchArray($result)) {
-               echo "<tr class='tab_bg_1'>";
-               $link = "";
-               if (Session::isMultiEntitiesMode()) {
-                  echo "<td class='left top'>" . Dropdown::getDropdownName("glpi_entities", $data["entities_id"]) . "</td>";
-                  if ($data["entities_id"] == 0) {
-                     $link = "&criteria[1][link]=AND&criteria[1][searchtype]=contains&criteria[1][value]=-1&criteria[1][field]=81";
-                  } else {
-                     $link = "&criteria[1][link]=AND&criteria[1][searchtype]=equals&criteria[1][value]=" . $data["entities_id"] . "&criteria[1][field]=80";
-                  }
-               }
-               if (empty($data["TYPE"])) {
-                  echo "<td><a href='" . $CFG_GLPI["root_doc"] . "/plugins/appliances/front/appliance.php?glpisearchcount=2&criteria[0][searchtype]=contains&criteria[0][value]=NULL&criteria[0][field]=2$link&is_deleted=0&itemtype=PluginAppliancesAppliance&start=0'>" . $data["total"] . " " . __('Without type', 'environment') . "</a></td>";
-               } else {
-                  echo "<td><a href='" . $CFG_GLPI["root_doc"] . "/plugins/appliances/front/appliance.php?glpisearchcount=2&criteria[0][searchtype]=contains&criteria[0][value]=" . rawurlencode($data["TYPE"]) . "&criteria[0][field]=2$link&is_deleted=0&itemtype=PluginAppliancesAppliance&start=0'>" . $data["total"] . " " . $data["TYPE"] . "</a></td>";
-               }
-               echo "</tr>";
-            }
-         } else {
-            echo "<tr><th colspan='2'>" . __('Appliances', 'environment') . " : 0</th></tr>";
-         }
-
-         echo "</table><br>";
-      }
-   }
-
    static function showwebapplications() {
       global $CFG_GLPI, $DB;
 
-      if (Session::haveRight("plugin_environment_webapplications", READ)) {
+      if (Session::haveRight("appliance", READ)) {
          echo "<table class='tab_cadrehov' width='750px'>";
          echo "<tr>";
          echo "<th class='center top' colspan='2'>";
-         echo "<a href=\"" . $CFG_GLPI["root_doc"] . "/plugins/webapplications/front/webapplication.php\">";
+         echo "<a href=\"" . $CFG_GLPI["root_doc"] . "/front/appliance.php\">";
          echo __('Web applications', 'environment');
          echo "</th></tr>";
          $dbu    = new DbUtils();
-         $query  = "SELECT COUNT(`glpi_plugin_webapplications_webapplications`.`id`) AS total,
-                        `glpi_plugin_webapplications_webapplicationtypes`.`name` AS TYPE,
-                        `glpi_plugin_webapplications_webapplications`.`entities_id` 
-                  FROM `glpi_plugin_webapplications_webapplications` ";
-         $query  .= " LEFT JOIN `glpi_plugin_webapplications_webapplicationtypes` ON (`glpi_plugin_webapplications_webapplications`.`plugin_webapplications_webapplicationtypes_id` = `glpi_plugin_webapplications_webapplicationtypes`.`id`) ";
-         $query  .= " LEFT JOIN `glpi_entities` ON (`glpi_entities`.`id`=`glpi_plugin_webapplications_webapplications`.`entities_id`) ";
-         $query  .= "WHERE `glpi_plugin_webapplications_webapplications`.`is_deleted` = '0' "
-            . $dbu->getEntitiesRestrictRequest(" AND ", "glpi_plugin_webapplications_webapplications", '', '', true);
-         $query  .= "GROUP BY `glpi_plugin_webapplications_webapplications`.`entities_id`,`TYPE`
-               ORDER BY `glpi_entities`.`completename`, `glpi_plugin_webapplications_webapplicationtypes`.`name` ";
+         $query  = "SELECT COUNT(`glpi_appliances`.`id`) AS total,
+                        `glpi_appliancetypes`.`name` AS TYPE,
+                        `glpi_appliances`.`entities_id` 
+                  FROM `glpi_appliances` ";
+         $query  .= " LEFT JOIN `glpi_appliancetypes` ON (`glpi_appliances`.`appliancetypes_id` = `glpi_appliancetypes`.`id`) ";
+         $query  .= " LEFT JOIN `glpi_entities` ON (`glpi_entities`.`id`=`glpi_appliances`.`entities_id`) ";
+         $query  .= "WHERE `glpi_appliances`.`is_deleted` = '0' "
+            . $dbu->getEntitiesRestrictRequest(" AND ", "glpi_appliances", '', '', true);
+         $query  .= "GROUP BY `glpi_appliances`.`entities_id`,`TYPE`
+               ORDER BY `glpi_entities`.`completename`, `glpi_appliancetypes`.`name` ";
          $result = $DB->query($query);
          if ($DB->numrows($result)) {
-            echo "<tr><th colspan='2'>" . __('Web applications', 'environment') . " : </th></tr>";
+            echo "<tr><th colspan='2'>" . __('Appliances') . " : </th></tr>";
             while ($data = $DB->fetchArray($result)) {
                echo "<tr class='tab_bg_1'>";
                $link = "";
@@ -281,9 +228,9 @@ class PluginEnvironmentDisplay extends CommonGLPI {
                   }
                }
                if (empty($data["TYPE"])) {
-                  echo "<td><a href='" . $CFG_GLPI["root_doc"] . "/plugins/webapplications/front/webapplication.php?glpisearchcount=2&criteria[0][searchtype]=contains&criteria[0][value]=NULL&criteria[0][field]=2$link&is_deleted=0&itemtype=PluginWebapplicationsWebapplication&start=0'>" . $data["total"] . " " . __('Without type', 'environment') . "</a></td>";
+                  echo "<td><a href='" . $CFG_GLPI["root_doc"] . "/front/appliance.php?glpisearchcount=2&criteria[0][searchtype]=contains&criteria[0][value]=NULL&criteria[0][field]=2$link&is_deleted=0&itemtype=PluginWebapplicationsWebapplication&start=0'>" . $data["total"] . " " . __('Without type', 'environment') . "</a></td>";
                } else {
-                  echo "<td><a href='" . $CFG_GLPI["root_doc"] . "/plugins/webapplications/front/webapplication.php?glpisearchcount=2&criteria[0][searchtype]=contains&criteria[0][value]=" . rawurlencode($data["TYPE"]) . "&criteria[0][field]=2$link&is_deleted=0&itemtype=PluginWebapplicationsWebapplication&start=0'>" . $data["total"] . " " . $data["TYPE"] . "</a></td>";
+                  echo "<td><a href='" . $CFG_GLPI["root_doc"] . "/front/appliance.php?glpisearchcount=2&criteria[0][searchtype]=contains&criteria[0][value]=" . rawurlencode($data["TYPE"]) . "&criteria[0][field]=2$link&is_deleted=0&itemtype=PluginWebapplicationsWebapplication&start=0'>" . $data["total"] . " " . $data["TYPE"] . "</a></td>";
                }
                echo "</tr>";
             }

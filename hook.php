@@ -36,6 +36,7 @@ function plugin_environment_install() {
    include_once(GLPI_ROOT . "/plugins/environment/inc/profile.class.php");
 
    $update = false;
+
    if ($DB->tableExists("glpi_plugin_environment_profiles")
        && $DB->fieldExists("glpi_plugin_environment_profiles", "interface")) {
 
