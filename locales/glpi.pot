@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: GLPI - Environment plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-03 15:39+0000\n"
+"POT-Creation-Date: 2020-11-04 09:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -28,39 +28,33 @@ msgid_plural "Encryption keys"
 msgstr[0] ""
 msgstr[1] ""
 
-#: inc/display.class.php:205 inc/display.class.php:221
-#: inc/display.class.php:241
-msgid "Appliances"
-msgstr ""
-
-#: inc/display.class.php:234 inc/display.class.php:284
-#: inc/display.class.php:373 inc/display.class.php:375
-#: inc/display.class.php:378 inc/display.class.php:443
-#: inc/display.class.php:494 inc/display.class.php:546
-msgid "Without type"
-msgstr ""
-
-#: inc/display.class.php:256 inc/display.class.php:271
-#: inc/display.class.php:291
+#: inc/display.class.php:203 inc/display.class.php:238
 msgid "Web applications"
 msgstr ""
 
-#: inc/display.class.php:306 inc/display.class.php:352
-#: inc/display.class.php:399 inc/profile.class.php:173
+#: inc/display.class.php:231 inc/display.class.php:320
+#: inc/display.class.php:322 inc/display.class.php:325
+#: inc/display.class.php:390 inc/display.class.php:441
+#: inc/display.class.php:493
+msgid "Without type"
+msgstr ""
+
+#: inc/display.class.php:253 inc/display.class.php:299
+#: inc/display.class.php:346 inc/profile.class.php:173
 msgid "Accounts"
 msgstr ""
 
-#: inc/display.class.php:414 inc/display.class.php:430
-#: inc/display.class.php:450
+#: inc/display.class.php:361 inc/display.class.php:377
+#: inc/display.class.php:397
 msgid "Domains"
 msgstr ""
 
-#: inc/display.class.php:465 inc/display.class.php:481
-#: inc/display.class.php:501 inc/profile.class.php:177
+#: inc/display.class.php:412 inc/display.class.php:428
+#: inc/display.class.php:448 inc/profile.class.php:177
 msgid "Databases"
 msgstr ""
 
-#: inc/display.class.php:516 inc/display.class.php:533
-#: inc/display.class.php:553 inc/profile.class.php:181
+#: inc/display.class.php:463 inc/display.class.php:480
+#: inc/display.class.php:500 inc/profile.class.php:181
 msgid "Badges"
 msgstr ""
