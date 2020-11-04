@@ -5,15 +5,16 @@
 # 
 # Translators:
 # Xavier CAILLAUD <thetsmr@gmail.com>, 2020
+# Kaya Zeren <kayazeren@gmail.com>, 2020
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: GLPI - Environment plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-02 17:44+0100\n"
+"POT-Creation-Date: 2020-11-03 15:39+0000\n"
 "PO-Revision-Date: 2020-11-02 16:02+0000\n"
-"Last-Translator: Xavier CAILLAUD <thetsmr@gmail.com>, 2020\n"
+"Last-Translator: Kaya Zeren <kayazeren@gmail.com>, 2020\n"
 "Language-Team: Turkish (Turkey) (https://www.transifex.com/infotelGLPI/teams/12359/tr_TR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -23,22 +24,47 @@ msgstr ""
 
 #: setup.php:60 inc/display.class.php:49 inc/profile.class.php:169
 msgid "Environment"
-msgstr "Çevre"
+msgstr "Ortam"
 
 #: inc/display.class.php:86 inc/display.class.php:87
 msgid "Encryption key"
 msgid_plural "Encryption keys"
-msgstr[0] "Şifreleme anahtarları"
+msgstr[0] "Şifreleme anahtarı"
 msgstr[1] "Şifreleme anahtarları"
 
-#: inc/profile.class.php:173
+#: inc/display.class.php:205 inc/display.class.php:221
+#: inc/display.class.php:241
+msgid "Appliances"
+msgstr "Aygıtlar"
+
+#: inc/display.class.php:234 inc/display.class.php:284
+#: inc/display.class.php:373 inc/display.class.php:375
+#: inc/display.class.php:378 inc/display.class.php:443
+#: inc/display.class.php:494 inc/display.class.php:546
+msgid "Without type"
+msgstr "Türü belirtilmemişler"
+
+#: inc/display.class.php:256 inc/display.class.php:271
+#: inc/display.class.php:291
+msgid "Web applications"
+msgstr "Web uygulamaları"
+
+#: inc/display.class.php:306 inc/display.class.php:352
+#: inc/display.class.php:399 inc/profile.class.php:173
 msgid "Accounts"
 msgstr "Hesaplar"
 
-#: inc/profile.class.php:177
+#: inc/display.class.php:414 inc/display.class.php:430
+#: inc/display.class.php:450
+msgid "Domains"
+msgstr "Etki alanları"
+
+#: inc/display.class.php:465 inc/display.class.php:481
+#: inc/display.class.php:501 inc/profile.class.php:177
 msgid "Databases"
 msgstr "Veritabanları"
 
-#: inc/profile.class.php:181
+#: inc/display.class.php:516 inc/display.class.php:533
+#: inc/display.class.php:553 inc/profile.class.php:181
 msgid "Badges"
 msgstr "Yaka kartları"
