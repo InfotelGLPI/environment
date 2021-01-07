@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: GLPI - Environment plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-04 11:17+0000\n"
+"POT-Creation-Date: 2021-01-07 12:50+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,39 +22,39 @@ msgstr ""
 msgid "Environment"
 msgstr ""
 
-#: inc/display.class.php:86 inc/display.class.php:87
+#: inc/display.class.php:85
 msgid "Encryption key"
 msgid_plural "Encryption keys"
 msgstr[0] ""
 msgstr[1] ""
 
-#: inc/display.class.php:203 inc/display.class.php:238
+#: inc/display.class.php:201 inc/display.class.php:236
 msgid "Web applications"
 msgstr ""
 
-#: inc/display.class.php:231 inc/display.class.php:320
-#: inc/display.class.php:322 inc/display.class.php:325
-#: inc/display.class.php:390 inc/display.class.php:441
-#: inc/display.class.php:493
+#: inc/display.class.php:229 inc/display.class.php:318
+#: inc/display.class.php:320 inc/display.class.php:323
+#: inc/display.class.php:388 inc/display.class.php:439
+#: inc/display.class.php:491
 msgid "Without type"
 msgstr ""
 
-#: inc/display.class.php:253 inc/display.class.php:299
-#: inc/display.class.php:346 inc/profile.class.php:173
+#: inc/display.class.php:251 inc/display.class.php:297
+#: inc/display.class.php:344 inc/profile.class.php:173
 msgid "Accounts"
 msgstr ""
 
-#: inc/display.class.php:361 inc/display.class.php:377
-#: inc/display.class.php:397
+#: inc/display.class.php:359 inc/display.class.php:375
+#: inc/display.class.php:395
 msgid "Domains"
 msgstr ""
 
-#: inc/display.class.php:412 inc/display.class.php:428
-#: inc/display.class.php:448 inc/profile.class.php:177
+#: inc/display.class.php:410 inc/display.class.php:426
+#: inc/display.class.php:446 inc/profile.class.php:177
 msgid "Databases"
 msgstr ""
 
-#: inc/display.class.php:463 inc/display.class.php:480
-#: inc/display.class.php:500 inc/profile.class.php:181
+#: inc/display.class.php:461 inc/display.class.php:478
+#: inc/display.class.php:498 inc/profile.class.php:181
 msgid "Badges"
 msgstr ""
