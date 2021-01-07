@@ -82,9 +82,7 @@ class PluginEnvironmentDisplay extends CommonGLPI {
             }
 
             if ($plug == "accounts") {
-               $image                                   = "<img src='" . $CFG_GLPI["root_doc"] . "/plugins/accounts/pics/cadenas.png' title='" .
-                                                          _n('Encryption key', 'Encryption keys', 2, 'accounts') . "' alt='" .
-                                                          _n('Encryption key', 'Encryption keys', 2, 'accounts') . "'>";
+               $image = "<i class='fas fa-lock fa-2x' title='" . _n('Encryption key', 'Encryption keys', 2, 'accounts') . "'></i>";
                $menu['options'][$plug]['links'][$image] = PluginAccountsHash::getSearchURL(false);
 
                $menu['options']['hash']['title']           = PluginAccountsHash::getTypeName(2);
