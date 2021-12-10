@@ -4,16 +4,16 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Xavier CAILLAUD <thetsmr@gmail.com>, 2020
+# Xavier CAILLAUD <thetsmr@gmail.com>, 2021
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: GLPI - Environment plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-02 17:44+0100\n"
+"POT-Creation-Date: 2021-01-07 12:50+0000\n"
 "PO-Revision-Date: 2020-11-02 16:02+0000\n"
-"Last-Translator: Xavier CAILLAUD <thetsmr@gmail.com>, 2020\n"
+"Last-Translator: Xavier CAILLAUD <thetsmr@gmail.com>, 2021\n"
 "Language-Team: French (France) (https://www.transifex.com/infotelGLPI/teams/12359/fr_FR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -25,20 +25,39 @@ msgstr ""
 msgid "Environment"
 msgstr "Environnement"
 
-#: inc/display.class.php:86 inc/display.class.php:87
+#: inc/display.class.php:85
 msgid "Encryption key"
 msgid_plural "Encryption keys"
 msgstr[0] "Clé de cryptage"
 msgstr[1] "Clés de cryptages"
 
-#: inc/profile.class.php:173
+#: inc/display.class.php:201 inc/display.class.php:236
+msgid "Web applications"
+msgstr "Applications Web"
+
+#: inc/display.class.php:229 inc/display.class.php:318
+#: inc/display.class.php:320 inc/display.class.php:323
+#: inc/display.class.php:388 inc/display.class.php:439
+#: inc/display.class.php:491
+msgid "Without type"
+msgstr "Sans type"
+
+#: inc/display.class.php:251 inc/display.class.php:297
+#: inc/display.class.php:344 inc/profile.class.php:173
 msgid "Accounts"
 msgstr "Comptes"
 
-#: inc/profile.class.php:177
+#: inc/display.class.php:359 inc/display.class.php:375
+#: inc/display.class.php:395
+msgid "Domains"
+msgstr "Domaines"
+
+#: inc/display.class.php:410 inc/display.class.php:426
+#: inc/display.class.php:446 inc/profile.class.php:177
 msgid "Databases"
 msgstr "Bases de données"
 
-#: inc/profile.class.php:181
+#: inc/display.class.php:461 inc/display.class.php:478
+#: inc/display.class.php:498 inc/profile.class.php:181
 msgid "Badges"
 msgstr "Badges"
